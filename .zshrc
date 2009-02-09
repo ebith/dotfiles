@@ -34,5 +34,9 @@ alias la="ls -aF --color=tty"
 alias du="du -h"
 alias df="df -h"
 
+function psx {
+ps aux| head -1 && ps aux | grep $1 | sed -e '/grep/d'
+};
+
 #for server
 #export LANG=C
