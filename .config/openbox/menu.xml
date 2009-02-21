@@ -9,6 +9,9 @@
   <item label="Terminal">
     <action name="Execute"><execute>mlterm</execute></action>
   </item>
+  <item label="FileManager">
+    <action name="Execute"><execute>pcmanfm</execute></action>
+  </item>
   <item label="Browser">
     <action name="Execute"><execute>firefox</execute></action>
   </item>
