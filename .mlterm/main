@@ -5,3 +5,4 @@ fg_color = white
 bg_color = black
 tabsize = 4
 logsize = 512
+line_space = 3

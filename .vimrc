@@ -29,3 +29,7 @@ noremap k 5k
 
 noremap ; :
 noremap : ;
+
+set fileformats=unix,dos,mac
+set enc=utf-8
+
