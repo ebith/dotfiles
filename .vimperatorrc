@@ -86,10 +86,8 @@ qmark n http://nicovideo.jp/
 qmark d http://delicious.com/ebith/
 qmark o http://b.hatena.ne.jp/Oiraya/
 qmark e http://b.hatena.ne.jp/ebith/
-qmark f http://www.feelmy.net/freshreader/feedindex.php
 qmark i http://i-know.jp/ebith/
 qmark l http://reader.livedoor.com/reader/
-qmark a http://mai-net.ath.cx/
 
 "はてブコメント表示
 map b ;hbinfo<CR>
@@ -104,7 +102,6 @@ let g:textarea_ime_mode = "inactive"
 
 " feed some keys2
 autocmd LocationChange .* :fmapc
-autocmd LocationChange www\\.feelmy\\.net/freshreader :fmap j k x e n p f i
 autocmd LocationChange reader\\.livedoor\\.com/reader :fmap m g w j k s a p o v c <Space> <S-Space> z b < >
 
 let g:direct_sbm_use_services_by_post = "h"
