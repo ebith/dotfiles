@@ -31,9 +31,14 @@ alias ls="ls -F --color=tty"
 alias ll="ls -lF --color=tty"
 alias la="ls -aF --color=tty"
 alias lx="ls -alF --color=tty"
+
 alias du="du -h"
 alias df="df -h"
+
 alias untar="tar xvfz"
+
+alias gitc="git commit -am"
+alias gitp="git push origin master"
 
 function psx {
 ps aux| head -1 && ps aux | grep $1 | sed -e '/grep/d'
