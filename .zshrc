@@ -36,6 +36,7 @@ alias du="du -h"
 alias df="df -h"
 
 alias untar="tar xvfz"
+alias untars="find ./ -name "*tar.gz" | xargs -n1 tar xzvf"
 
 alias gitc="git commit -am"
 alias gitp="git push origin master"
