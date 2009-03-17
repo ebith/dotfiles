@@ -30,8 +30,10 @@ zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'c
 alias ls="ls -F --color=tty"
 alias ll="ls -lF --color=tty"
 alias la="ls -aF --color=tty"
+alias lx="ls -alF --color=tty"
 alias du="du -h"
 alias df="df -h"
+alias untar="tar xvfz"
 
 function psx {
 ps aux| head -1 && ps aux | grep $1 | sed -e '/grep/d'
