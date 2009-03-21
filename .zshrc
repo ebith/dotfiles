@@ -27,10 +27,18 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 
 #alias
-alias ls="ls -F --color=tty"
-alias ll="ls -lF --color=tty"
-alias la="ls -aF --color=tty"
-alias lx="ls -alF --color=tty"
+case "${OSTYPE}" in
+freebsd*|darwin*)
+alias ls="ls -G -w"
+;;
+linux*)
+alias ls="ls --color"
+;;
+esac
+alias ll="ls -l"
+alias lf="ls -F"
+alias la="ls -a"
+alias lx="ls -alF"
 
 alias du="du -h"
 alias df="df -h"
