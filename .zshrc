@@ -46,7 +46,8 @@ alias df="df -h"
 alias untar="tar xvfz"
 alias untars="find ./ -name \"*tar.gz\" | xargs -n1 tar xzvf"
 
-alias gitc="git commit -am"
+alias gita="git add ."
+alias gitc="git commit -m"
 alias gitp="git push origin master"
 
 function psx {
