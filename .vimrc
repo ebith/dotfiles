@@ -24,9 +24,6 @@ au BufNewFile,BufRead * set tabstop=4 shiftwidth=4
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
 au BufNewFile,BufRead * match ZenkakuSpace /ã/
 
-noremap j 5j
-noremap k 5k
-
 noremap ; :
 noremap : ;
 
