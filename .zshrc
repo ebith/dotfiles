@@ -55,3 +55,4 @@ ps aux| head -1 && ps aux | grep $1 | sed -e '/grep/d'
 };
 
 export LANG=ja_JP.UTF-8
+export SCREENDIR=~/.screen
