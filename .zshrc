@@ -54,5 +54,13 @@ function psx {
 ps aux| head -1 && ps aux | grep $1 | sed -e '/grep/d'
 };
 
+#MacPorts
+case "${OSTYPE}" in
+darwin*)
+    export PATH=/opt/local/bin:/opt/local/sbin/:$PATH
+    export MANPATH=/opt/local/man:$MANPATH
+;;
+esac
+
 export LANG=ja_JP.UTF-8
 export SCREENDIR=~/.screen
