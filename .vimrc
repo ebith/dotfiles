@@ -29,4 +29,5 @@ noremap : ;
 
 set fileformats=unix,dos,mac
 set enc=utf-8
+set fileencodings=utf-8,cp932
 
