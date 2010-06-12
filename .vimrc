@@ -36,4 +36,3 @@ noremap : ;
 set fileformats=unix,dos,mac
 set encoding=utf-8
 set fileencodings=iso-2022-jp,sjis,euc-jp
-
