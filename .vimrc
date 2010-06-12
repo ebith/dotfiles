@@ -1,38 +1,61 @@
+set t_Co=256
 colorscheme wombat
-if g:colors_name ==? 'wombat'
-      hi Visual gui=none guifg=khaki guibg=olivedrab
-endif
-
-syntax on
 
 set autoindent
 set nocompatible
 set expandtab
-set incsearch
-set list
 set number
 set showmatch
 set smartcase
 set smartindent
 set tabstop=4
 set shiftwidth=4
+set softtabstop=0
 set smarttab
-set modeline
+set hlsearch
 
-augroup InsertHook
-autocmd!
-autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
-autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
-augroup END
+filetype on
+filetype indent on
+filetype plugin on
 
-au BufNewFile,BufRead * set tabstop=4 shiftwidth=4
+"nobackup noswap
+set noswapfile
+set nobackup
 
-highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
-au BufNewFile,BufRead * match ZenkakuSpace /ã/
+syntax on
 
+"USキーボード用
 noremap ; :
 noremap : ;
 
+"Enterで改行
+noremap <CR> o<ESC>
+
+"カーソルのある行をハイライトする
+set cursorline
+
 set fileformats=unix,dos,mac
-set encoding=utf-8
-set fileencodings=iso-2022-jp,sjis,euc-jp
+set enc=utf-8
+set fileencodings=utf-8,cp932
+
+"copypath.vim
+"無名レジスタにもコピーデータを入れる
+let g:copypath_copy_to_unnamed_register = 1
+
+"xで削除した文字はレジスタに入れない
+noremap x "_x
+noremap dd "_dd
+let g:yankring_n_keys = 'Y D x dd'
+
+setlocal omnifunc=syntaxcomplete#Complete
+
+"ステータスラインを常に表示
+set laststatus=2
+"ステータスラインに文字コードと改行文字を表示する
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+"タブの左側にカーソル表示
+set list
+set listchars=eol:$,tab:><,extends:<,trail:+
+"入力中のコマンドをステータスに表示する
+set showcmd
+
