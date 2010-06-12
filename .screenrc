@@ -12,4 +12,6 @@ bind n screen
 bind h prev
 bind l next
 bind w windowlist
-
+logfile "/home/ebith/.screen/%Y%m%d-%n.log"
+log on
+deflog on

@@ -1,4 +1,9 @@
 colorscheme wombat
+if g:colors_name ==? 'wombat'
+      hi Visual gui=none guifg=khaki guibg=olivedrab
+endif
+
+syntax on
 
 set autoindent
 set nocompatible
@@ -12,6 +17,7 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 set smarttab
+set modeline
 
 augroup InsertHook
 autocmd!
@@ -28,5 +34,6 @@ noremap ; :
 noremap : ;
 
 set fileformats=unix,dos,mac
-set enc=utf-8
+set encoding=utf-8
+set fileencodings=iso-2022-jp,sjis,euc-jp
 
