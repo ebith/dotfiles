@@ -1,5 +1,5 @@
 set t_Co=256
-colorscheme wombat
+colorscheme wombat256
 
 set autoindent
 set nocompatible
