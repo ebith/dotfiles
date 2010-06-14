@@ -48,10 +48,6 @@ alias df="df -h"
 alias untar="tar xvfz"
 alias untars="find ./ -name \"*tar.gz\" | xargs -n1 tar xzvf"
 
-alias gita="git add ."
-alias gitc="git commit -m"
-alias gitp="git push origin master"
-
 function psx {
 ps aux| head -1 && ps aux | grep $1 | sed -e '/grep/d'
 };
