@@ -59,3 +59,9 @@ set listchars=eol:$,tab:><,extends:<,trail:+
 "入力中のコマンドをステータスに表示する
 set showcmd
 
+" neocomplcache
+let g:neocomplcache_enable_at_startup  = 1
+let g:neocomplcache_enable_smart_case = 1
+
+" yankring.vim
+let g:yankring_history_file = '.yankring_history'
