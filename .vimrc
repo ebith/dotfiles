@@ -45,7 +45,7 @@ let g:copypath_copy_to_unnamed_register = 1
 "xで削除した文字はレジスタに入れない
 noremap x "_x
 noremap dd "_dd
-let g:yankring_n_keys = 'Y D x dd'
+let g:yankring_n_keys = 'Y D'
 
 setlocal omnifunc=syntaxcomplete#Complete
 
