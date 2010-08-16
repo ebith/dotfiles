@@ -7,11 +7,17 @@ defscrollback 10000
 escape ^Vv
 startup_message off
 vbell off
-caption always "%{= wb} %-w%{=bu dr}%n %t%{-}%+w %= %{=b wk} [%l] %{=b wm}%C %A"
-bind n screen
+caption always "%{= wg} %-w%{=bu dr}%n %t%{-}%+w %= %{=b wb}%m/%0d %{=b wm}%0C %A"
+
+
+bind t screen
+bind T title
 bind h prev
 bind l next
 bind w windowlist
+bind s
+
 logfile "/home/ebith/.screen/%Y%m%d-%n.log"
 log on
 deflog on
+
