@@ -13,6 +13,7 @@ set shiftwidth=4
 set softtabstop=0
 set smarttab
 set hlsearch
+set backspace=indent,eol,start
 
 filetype on
 filetype indent on
