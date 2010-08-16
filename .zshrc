@@ -62,3 +62,4 @@ esac
 
 export LANG=ja_JP.UTF-8
 export SCREENDIR=~/.screen
+export TERM=xterm-256color
