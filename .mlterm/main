@@ -1,8 +1,0 @@
-not_use_unicode_font = true
-use_scrollbar = false
-use_anti_alias = false
-fg_color = white
-bg_color = black
-tabsize = 4
-logsize = 512
-line_space = 3
