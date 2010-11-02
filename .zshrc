@@ -34,13 +34,12 @@ freebsd*|darwin*)
 alias ls="ls -G -w"
 ;;
 cygwin|linux*)
-alias ls="ls --color"
+alias ls="ls --color -Fa"
 ;;
 esac
-alias ll="ls -l"
-alias lf="ls -F"
-alias la="ls -a"
-alias lx="ls -alF"
+alias ll="ls -lF"
+
+alias h="history 20"
 
 alias du="du -h"
 alias df="df -h"
