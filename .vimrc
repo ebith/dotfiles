@@ -23,6 +23,14 @@ filetype plugin on
 set noswapfile
 set nobackup
 
+"再読込、vim終了後も継続するアンドゥ(7.3)
+if version >= 703
+    "Persistent undoを有効化(7.3)
+    set undofile
+    "アンドゥの保存場所(7.3)
+    set undodir=./.vimundo,~/.vimundo
+endif
+
 syntax on
 
 "USキーボード用
