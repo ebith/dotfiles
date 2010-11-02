@@ -16,6 +16,10 @@ setopt correct
 setopt list_packed
 setopt noautoremoveslash
 setopt complete_aliases
+
+#historyを上書きではなく追記する
+setopt append_history
+
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
