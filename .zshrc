@@ -1,6 +1,5 @@
 # Created by newuser for 4.3.2
-autoload -U compinit
-compinit
+autoload -U compinit; compinit
 
 PROMPT="%n$ "
 RPROMPT="[%~]"
@@ -39,13 +38,9 @@ alias ls="ls --color -Fa"
 esac
 alias ll="ls -lF"
 
-alias h="history 20"
+alias L="| less -R"
 
-alias du="du -h"
-alias df="df -h"
-
-alias untar="tar xvfz"
-alias untars="find ./ -name \"*tar.gz\" | xargs -n1 tar xzvf"
+alias h="history -20"
 
 function psx {
 ps aux| head -1 && ps aux | grep $1 | sed -e '/grep/d'
