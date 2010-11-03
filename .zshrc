@@ -61,3 +61,12 @@ esac
 export LANG=ja_JP.UTF-8
 export SCREENDIR=~/.screen
 export TERM=xterm-256color
+
+#ターミナルのタイトルを設定する
+case "${TERM}" in
+kterm*|xterm*)
+    precmd() {
+        echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
+    }
+    ;;
+esac 
