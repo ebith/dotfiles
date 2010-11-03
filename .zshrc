@@ -66,7 +66,7 @@ export TERM=xterm-256color
 case "${TERM}" in
 kterm*|xterm*)
     precmd() {
-        echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
+        echo -ne "\033]0;${HOST%%.*}:${PWD}\007"
     }
     ;;
 esac 
