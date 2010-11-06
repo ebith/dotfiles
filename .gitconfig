@@ -1,3 +1,5 @@
 [user]
-	name = ebith
-	email = ebith@feelmy.net
+    name = ebith
+    email = ebith@feelmy.net
+[color]
+    ui = auto
