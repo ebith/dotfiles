@@ -1,5 +1,9 @@
 [user]
-    name = ebith
-    email = ebith@feelmy.net
+  name = ebith
+  email = ebith@feelmy.net
 [color]
-    ui = auto
+  ui = auto
+[diff]
+  external = ~/dotfiles/git_diff_wrapper
+[pager]
+  diff =
