@@ -8,18 +8,28 @@ SPROMPT="correct: %R -> %r ? "
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
+
 setopt hist_ignore_dups     # ignore duplication command history list
 setopt share_history        # share command history data
-setopt auto_cd
-setopt auto_pushd
+setopt auto_cd              # cd無くてもcdする
+setopt auto_pushd           # popdすれば前のディレクトリに戻れるようになる
 setopt correct
 setopt list_packed
 setopt noautoremoveslash
 setopt complete_aliases
 
+#URLを自動エスケープ
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
+#=のあともパス名保管する
+setopt magic_equal_subst
+
+
 #historyを上書きではなく追記する
 setopt append_history
 
+#賢く履歴を辿る
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -69,4 +79,7 @@ kterm*|xterm*)
         echo -ne "\033]0;${HOST%%.*}:${PWD}\007"
     }
     ;;
-esac 
+esac
+
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
