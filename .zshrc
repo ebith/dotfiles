@@ -1,4 +1,5 @@
 # Created by newuser for 4.3.2
+fpath=($HOME/.zsh/functions $fpath)
 autoload -U compinit; compinit
 
 PROMPT="%n$ "
