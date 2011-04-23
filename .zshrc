@@ -1,4 +1,5 @@
 # Created by newuser for 4.3.2
+fpath=($HOME/.zsh/functions $fpath)
 autoload -U compinit; compinit
 
 PROMPT="%n$ "
@@ -44,13 +45,13 @@ zstyle ':completion:*' list-colors 'di=01;34' 'ln=01;35' 'so=01;32' 'ex=01;31' '
 #alias
 case "${OSTYPE}" in
 freebsd*|darwin*)
-alias ls="ls -G -w"
+alias ls="ls -G -aFw"
 ;;
 cygwin|linux*)
-alias ls="ls --color -Fa"
+alias ls="ls --color -aF"
 ;;
 esac
-alias ll="ls -lF"
+alias ll="ls -aFl"
 
 alias L="| less -R"
 
@@ -61,12 +62,12 @@ ps aux| head -1 && ps aux | grep $1 | sed -e '/grep/d'
 };
 
 #MacPorts
-case "${OSTYPE}" in
-darwin*)
-    export PATH=/opt/local/bin:/opt/local/sbin/:$PATH
-    export MANPATH=/opt/local/man:$MANPATH
-;;
-esac
+#case "${OSTYPE}" in
+#darwin*)
+#    export PATH=/opt/local/bin:/opt/local/sbin/:$PATH
+#    export MANPATH=/opt/local/man:$MANPATH
+#;;
+#esac
 
 export LANG=ja_JP.UTF-8
 export SCREENDIR=~/.screen
