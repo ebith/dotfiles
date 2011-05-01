@@ -7,3 +7,9 @@
   external = ~/dotfiles/git_diff_wrapper
 [pager]
   diff =
+[alias]
+  ci = commit
+  co = checkout
+  st = status
+  ls = log --stat
+  up = pull --rebase
