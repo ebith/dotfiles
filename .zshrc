@@ -1,5 +1,11 @@
 # Created by newuser for 4.3.2
 fpath=($HOME/.zsh/functions $fpath)
+
+#gitの補完
+autoload bashcompinit
+bashcompinit
+source .zsh/git-completion.bash
+
 autoload -U compinit; compinit
 
 #$colors[red]とか書けるようになる
@@ -96,6 +102,7 @@ PROMPT="
 %{${fg[blue]}%}[%~]%{${reset_color}%}
 %n$ "
 RPROMPT="%1(v|%F{green}%1v%f|)"
+
 SPROMPT="correct: %R -> %r ? "
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
