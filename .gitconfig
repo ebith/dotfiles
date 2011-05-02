@@ -2,14 +2,18 @@
   name = ebith
   email = ebith@feelmy.net
 [color]
-  ui = auto
+  ui = true
 [diff]
   external = ~/dotfiles/git_diff_wrapper
 [pager]
   diff =
 [alias]
+  b = branch
   ci = commit
   co = checkout
-  st = status
   ls = log --stat
+  sm = submodule
+  st = status
   up = pull --rebase
+[core]
+  excludesfile = ~/.gitignore.global
