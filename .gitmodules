@@ -1,0 +1,39 @@
+[submodule ".vim/bundle/vim-pathogen"]
+	path = .vim/bundle/vim-pathogen
+	url = git://github.com/tpope/vim-pathogen.git
+[submodule ".vim/bundle/neocomplcache"]
+	path = .vim/bundle/neocomplcache
+	url = git://github.com/Shougo/neocomplcache.git
+[submodule ".vim/bundle/unite.vim"]
+	path = .vim/bundle/unite.vim
+	url = git://github.com/Shougo/unite.vim.git
+[submodule ".vim/bundle/caw.vim"]
+	path = .vim/bundle/caw.vim
+	url = git://github.com/tyru/caw.vim.git
+[submodule ".vim/bundle/JavaScript-syntax"]
+	path = .vim/bundle/JavaScript-syntax
+	url = git://github.com/vim-scripts/JavaScript-syntax.git
+[submodule ".vim/bundle/JavaScript-Indent"]
+	path = .vim/bundle/JavaScript-Indent
+	url = git://github.com/vim-scripts/JavaScript-Indent.git
+[submodule ".vim/bundle/IndentAnything"]
+	path = .vim/bundle/IndentAnything
+	url = git://github.com/vim-scripts/IndentAnything.git
+[submodule ".vim/bundle/vimproc"]
+	path = .vim/bundle/vimproc
+	url = git://github.com/Shougo/vimproc.git
+[submodule ".vim/bundle/unite-everything"]
+	path = .vim/bundle/unite-everything
+	url = git://github.com/sgur/unite-everything.git
+[submodule ".vim/bundle/unite-help"]
+	path = .vim/bundle/unite-help
+	url = git://github.com/tsukkee/unite-help.git
+[submodule ".vim/bundle/unite-colorscheme"]
+	path = .vim/bundle/unite-colorscheme
+	url = git://github.com/ujihisa/unite-colorscheme.git
+[submodule ".vim/bundle/unite-font"]
+	path = .vim/bundle/unite-font
+	url = git://github.com/ujihisa/unite-font.git
+[submodule ".vim/bundle/unite-history"]
+	path = .vim/bundle/unite-history
+	url = git://github.com/thinca/vim-unite-history.git
