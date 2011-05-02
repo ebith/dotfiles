@@ -2,3 +2,4 @@
 
 .vim/.netrwhist
 .vim/bundle/default
+.vim/autoload/pathogen.vim
