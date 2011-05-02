@@ -2,9 +2,10 @@
 fpath=($HOME/.zsh/functions $fpath)
 autoload -U compinit; compinit
 
-PROMPT="%n$ "
-SPROMPT="correct: %R -> %r ? "
+#$colors[red]とか書けるようになる
+autoload -U  colors; colors
 
+#履歴関係
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -25,7 +26,6 @@ zle -N self-insert url-quote-magic
 #=のあともパス名保管する
 setopt magic_equal_subst
 
-
 #historyを上書きではなく追記する
 setopt append_history
 
@@ -42,6 +42,8 @@ export LS_COLORS='di=01;34:ln=01;35:so=01;32:pi=01;33:ex=01;31:bd=46;34:cd=43;34
 zstyle ':completion:*' list-colors 'di=01;34' 'ln=01;35' 'so=01;32' 'ex=01;31' 'bd=46;34' 'cd=43;34'
 
 #alias
+alias screen="screen -xRU"
+
 case "${OSTYPE}" in
 freebsd*|darwin*)
 alias ls="ls -G -aFw"
@@ -90,6 +92,10 @@ precmd () {
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
-RPROMPT="%1(v|%F{green}%1v%f|)[%~]"
+PROMPT="
+%{${fg[blue]}%}[%~]%{${reset_color}%}
+%n$ "
+RPROMPT="%1(v|%F{green}%1v%f|)"
+SPROMPT="correct: %R -> %r ? "
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

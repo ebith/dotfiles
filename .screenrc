@@ -16,8 +16,9 @@ bind t screen
 bind T title
 bind h prev
 bind l next
-bind w windowlist
+bind w windowlist -b
 bind s
+bind ; colon
 
 bindkey "^[[1;5I" next
 bindkey "^[[1;6I" prev
