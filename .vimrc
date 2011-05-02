@@ -38,8 +38,6 @@ set wildmenu
 set wildchar=<Tab>
 set wildmode=list:full
 
-let mapleader = ","
-
 "nobackup noswap
 set noswapfile
 set nobackup
@@ -71,22 +69,12 @@ if has('syntax')
   augroup END
 endif
 
-"USキーボード用
-noremap ; :
-noremap : ;
-
-"Enterで改行
-noremap <CR> o<ESC>
-
 "カーソルのある行をハイライトする
 set cursorline
 
 set fileformats=unix,dos,mac
 set enc=utf-8
 set fileencodings=utf-8,cp932,euc-jp
-
-"xで削除した文字はレジスタに入れない
-nnoremap x "_x
 
 "ステータスラインを常に表示
 set laststatus=2
@@ -104,6 +92,28 @@ set synmaxcol=500
 " .viminfo
 set viminfo+=n~/.viminfo
 
+" help引いたらフリーズする
+set notagbsearch
+
+" mapping
+" ========================================
+let mapleader = ","
+
+noremap H :tabprevious<CR>
+noremap L :tabnext<CR>
+
+"xで削除した文字はレジスタに入れない
+nnoremap x "_x
+
+"USキーボード用
+noremap ; :
+noremap : ;
+
+"Enterで改行
+noremap <CR> o<ESC>
+
+" plugin
+" ========================================
 " neocomplcache
 let g:neocomplcache_enable_at_startup  = 1
 let g:neocomplcache_enable_smart_case = 1
@@ -125,6 +135,8 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " yankring.vim
 " let g:yankring_history_file = '.yankring_history'
@@ -143,9 +155,16 @@ noremap <Leader>us :Unite history/search<CR>
 noremap t :Unite buffer file_mru -default-action=tabopen<CR>
 noremap T :Unite -buffer-name=files buffer file_mru everything -default-action=tabopen<CR>
 
-noremap H :tabprevious<CR>
-noremap L :tabnext<CR>
-
-" help引いたらフリーズする
-set notagbsearch
-
+" howm
+let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.howm'
+let howm_fileencoding = 'utf-8'
+let howm_fileformat = 'unix'
+if has('win32') || has('win64')
+  let howm_dir = 'C:\dropbox/document/howm'
+  let mygrepprg = 'C:/bin/Cygwin/bin/grep'
+  let $CYGWIN = 'nodosfilewarning'
+elseif has('mac')
+  let howm_dir = '~/Dropbox/document/howm'
+  let mygrepprg = 'grep'
+  let MyGrep_ShellEncoding = 'utf-8'
+endif
