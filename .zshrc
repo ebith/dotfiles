@@ -1,15 +1,13 @@
 # Created by newuser for 4.3.2
 fpath=($HOME/.zsh/functions $fpath)
-
-#gitの補完
-autoload bashcompinit
-bashcompinit
-source .zsh/git-completion.bash
-
 autoload -U compinit; compinit
 
+#gitの補完
+#autoload -U bashcompinit; bashcompinit
+# source .zsh/git-completion.bash
+
 #$colors[red]とか書けるようになる
-autoload -U  colors; colors
+autoload -U colors; colors
 
 #履歴関係
 HISTFILE=~/.zsh_history
