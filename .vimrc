@@ -18,10 +18,6 @@ syntax on
 
 set t_Co=256
 colorscheme wombat256
-if g:colors_name ==? 'wombat256'
-  hi Visual gui=none guifg=khaki guibg=olivedrab
-endif
-
 
 set autoindent
 set nocompatible
