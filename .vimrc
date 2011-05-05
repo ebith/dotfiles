@@ -164,10 +164,12 @@ let howm_fileencoding = 'utf-8'
 let howm_fileformat = 'unix'
 if has('win32') || has('win64')
   let howm_dir = 'C:\dropbox/document/howm'
+  let QFixMRU_Filename = 'C:\dropbox\document\howm\.howm-mru'
   let mygrepprg = 'C:/bin/Cygwin/bin/grep'
   let $CYGWIN = 'nodosfilewarning'
 elseif has('mac')
   let howm_dir = '~/Dropbox/document/howm'
+  let QFixMRU_Filename = '~/Dropbox/document/howm/.howm-mru'
   let mygrepprg = 'grep'
   let MyGrep_ShellEncoding = 'utf-8'
 endif
