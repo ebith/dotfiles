@@ -2,9 +2,9 @@
 "    Description: 日本語Grepヘルパー
 "         Author: fuenor <fuenor@gmail.com>
 "                 http://sites.google.com/site/fudist/Home/grep
-"  Last Modified: 2011-01-03 22:58
-"        Version: 2.29
+"  Last Modified: 2011-04-24 19:51
 "================================================================================
+let s:Version = 2.79
 scriptencoding utf-8
 
 if exists('enable_MyGrep')
@@ -20,9 +20,6 @@ if v:version < 700 || &cp
   finish
 endif
 let loaded_MyGrep = 1
-if !has('quickfix')
-  finish
-endif
 
 let s:debug = 0
 if exists('g:fudist') && g:fudist
@@ -61,7 +58,7 @@ endif
 if !exists('g:MyGrep_Damemoji')
   let g:MyGrep_Damemoji = 2
 endif
-"2byte目が0x5cの「ダメ文字」
+"「ダメ文字」リスト
 let g:MyGrep_DamemojiReplaceDefault = ['[]','[ーソЫⅨ噂浬欺圭構蚕十申曾箪貼能表暴予禄兔喀媾彌拿杤歃濬畚秉綵臀藹觸軆鐔饅鷭偆砡纊犾]', '[ー―‐／＼＋±×ＡァゼソゾタダチボポマミАЪЫЬЭЮЯклмн院閏噂云運雲荏閲榎厭円魁骸浬馨蛙垣柿顎掛笠樫機擬欺犠疑祇義宮弓急救掘啓圭珪型契形鶏芸迎鯨后梗構江洪浩港砿鋼閤降察纂蚕讃賛酸餐施旨枝止宗充十従戎柔汁旬楯殉淳拭深申疹真神秦須酢図厨繊措曾曽楚狙疏捜掃挿掻叩端箪綻耽胆蛋畜竹筑蓄邸甜貼転顛点伝怒倒党冬如納能脳膿農覗倍培媒梅鼻票表評豹廟描府怖扶敷法房暴望某棒冒本翻凡盆諭夕予余与誉輿養慾抑欲蓮麓禄肋録論倭僉兌兔兢竸兩兪几處凩凭咫喙喀咯喊喟啻嘴嘶嘲嘸奸媼媾嫋嫂媽嫣學斈孺宀廖彈彌彎弯彑彖悳忿怡恠戞拏拿拆擔拈拜掉掟掵捫曄杣杤枉杰枩杼桀桍栲桎檗歇歃歉歐歙歔毬毫毳毯漾濕濬濔濘濱濮炮烟烋烝瓠畆畚畩畤畧畫痣痞痾痿磧禺秉秕秧秬秡窖窩竈窰紂綣綵緇綽綫總縵縹繃縷隋膽臀臂膺臉臍艝艚艟艤蕁藜藹蘊蘓蘋藾蛔蛞蛩蛬襦觴觸訃訖訐訌諚諫諳諧蹇躰軆躱躾軅軈轆轎轗轜錙鐚鐔鐓鐃鐇鐐閔閖閘閙顱饉饅饐饋饑饒驅驂驀驃鵝鷦鷭鷯鷽鸚鸛黠黥黨黯纊倞偆偰偂傔垬埈埇犾劯砡硎硤硺葈蒴蕓蕙]', '[ーソЫⅨ噂浬欺圭構蚕十申曾箪貼能表暴予禄兔喀媾彌拿杤歃濬畚秉綵臀藹觸軆鐔饅鷭偆砡纊犾－ポл榎掛弓芸鋼旨楯酢掃竹倒培怖翻慾處嘶斈忿掟桍毫烟痞窩縹艚蛞諫轎閖驂黥埈蒴僴礰]']
 
 if !exists('g:MyGrep_DamemojiReplaceReg')
@@ -76,10 +73,6 @@ endif
 "--includeオプションを使用する
 if !exists('g:MyGrep_IncludeOpt')
   let g:MyGrep_IncludeOpt = 0
-endif
-"現在登録されているGrep結果を保存するファイル
-if !exists('g:MyGrep_Resultfile')
-  let g:MyGrep_Resultfile = '~/.qfgrep.txt'
 endif
 
 if !exists('g:QFix_Height')
@@ -125,44 +118,48 @@ let g:MyGrep_qflist = []
 """"""""""""""""""""""""""""""
 "ユーザ呼び出し用コマンド
 """"""""""""""""""""""""""""""
+if !exists('g:MyGrep_SearchPathMode')
+  let g:MyGrep_SearchPathMode = 1
+endif
+
 if g:MyGrep_UseCommand == 1
-  silent! command -nargs=? -bang BGrep        call BGrep(<q-args>, <bang>0, 0)
-  silent! command -nargs=? -bang Vimgrep      call UGrep('vimgrep', <q-args>, <bang>0, 0)
-  silent! command -nargs=? -bang VGrep        call UGrep('vimgrep', <q-args>, <bang>0, 0)
+  command! -nargs=? -bang BGrep        call BGrep(<q-args>, <bang>0, 0)
+  command! -nargs=? -bang Vimgrep      call UGrep('vimgrep', <q-args>, g:MyGrep_SearchPathMode, 0)
+  command! -nargs=? -bang VGrep        call UGrep('vimgrep', <q-args>, g:MyGrep_SearchPathMode, 0)
 
-  silent! command -nargs=? -bang BGrepadd     call BGrep(<q-args>, <bang>0, 1)
-  silent! command -nargs=? -bang VGrepadd     call UGrep('vimgrep', <q-args>, <bang>0, 1)
-  silent! command -nargs=? -bang Vimgrepadd   call UGrep('vimgrep', <q-args>, <bang>0, 1)
+  command! -nargs=? -bang BGrepadd     call BGrep(<q-args>, <bang>0, 1)
+  command! -nargs=? -bang VGrepadd     call UGrep('vimgrep', <q-args>, g:MyGrep_SearchPathMode, 1)
+  command! -nargs=? -bang Vimgrepadd   call UGrep('vimgrep', <q-args>, g:MyGrep_SearchPathMode, 1)
 
-  silent! command! -nargs=* -bang Grep        call CGrep(0, <bang>0, 0, <q-args>)
-  silent! command! -nargs=* -bang FGrep       call CGrep(1, <bang>0, 0, <q-args>)
-  silent! command! -nargs=* -bang EGrep       call CGrep(0, <bang>0, 0, <q-args>)
-  silent! command! -nargs=* -bang RGrep       call RCGrep(0, <bang>0, 0, <q-args>)
-  silent! command! -nargs=* -bang RFGrep      call RCGrep(1, <bang>0, 0, <q-args>)
-  silent! command! -nargs=* -bang REGrep      call RCGrep(0, <bang>0, 0, <q-args>)
+  command! -nargs=* -bang Grep        call CGrep( 0, g:MyGrep_SearchPathMode, 0, <q-args>)
+  command! -nargs=* -bang FGrep       call CGrep( 1, g:MyGrep_SearchPathMode, 0, <q-args>)
+  command! -nargs=* -bang EGrep       call CGrep( 0, g:MyGrep_SearchPathMode, 0, <q-args>)
+  command! -nargs=* -bang RGrep       call RCGrep(0, g:MyGrep_SearchPathMode, 0, <q-args>)
+  command! -nargs=* -bang RFGrep      call RCGrep(1, g:MyGrep_SearchPathMode, 0, <q-args>)
+  command! -nargs=* -bang REGrep      call RCGrep(0, g:MyGrep_SearchPathMode, 0, <q-args>)
 
-  silent! command! -nargs=* -bang Grepadd     call CGrep(0, <bang>0, 1, <q-args>)
-  silent! command! -nargs=* -bang FGrepadd    call CGrep(1, <bang>0, 1, <q-args>)
-  silent! command! -nargs=* -bang EGrepadd    call CGrep(0, <bang>0, 1, <q-args>)
-  silent! command! -nargs=* -bang RGrepadd    call RCGrep(0, <bang>0, 1, <q-args>)
-  silent! command! -nargs=* -bang RFGrepadd   call RCGrep(1, <bang>0, 1, <q-args>)
-  silent! command! -nargs=* -bang REGrepadd   call RCGrep(0, <bang>0, 1, <q-args>)
+  command! -nargs=* -bang Grepadd     call CGrep( 0, g:MyGrep_SearchPathMode, 1, <q-args>)
+  command! -nargs=* -bang FGrepadd    call CGrep( 1, g:MyGrep_SearchPathMode, 1, <q-args>)
+  command! -nargs=* -bang EGrepadd    call CGrep( 0, g:MyGrep_SearchPathMode, 1, <q-args>)
+  command! -nargs=* -bang RGrepadd    call RCGrep(0, g:MyGrep_SearchPathMode, 1, <q-args>)
+  command! -nargs=* -bang RFGrepadd   call RCGrep(1, g:MyGrep_SearchPathMode, 1, <q-args>)
+  command! -nargs=* -bang REGrepadd   call RCGrep(0, g:MyGrep_SearchPathMode, 1, <q-args>)
 
-  silent! command! -nargs=* -bang QFGrep      call CGrep(0, <bang>0, 0, <q-args>)
-  silent! command! -nargs=* -bang QFGrepadd   call CGrep(0, <bang>0, 1, <q-args>)
-  silent! command! -nargs=* -bang QFFGrep     call CGrep(1, <bang>0, 0, <q-args>)
-  silent! command! -nargs=* -bang QFFGrepadd  call CGrep(1, <bang>0, 1, <q-args>)
-  silent! command! -nargs=* -bang QFRGrep     call RCGrep(0, <bang>0, 0, <q-args>)
-  silent! command! -nargs=* -bang QFRGrepadd  call RCGrep(0, <bang>0, 1, <q-args>)
-  silent! command! -nargs=* -bang QFRFGrep    call RCGrep(1, <bang>0, 0, <q-args>)
-  silent! command! -nargs=* -bang QFRFGrepadd call RCGrep(1, <bang>0, 1, <q-args>)
+  command! -nargs=* -bang QFGrep      call CGrep( 0, g:MyGrep_SearchPathMode, 0, <q-args>)
+  command! -nargs=* -bang QFGrepadd   call CGrep( 0, g:MyGrep_SearchPathMode, 1, <q-args>)
+  command! -nargs=* -bang QFFGrep     call CGrep( 1, g:MyGrep_SearchPathMode, 0, <q-args>)
+  command! -nargs=* -bang QFFGrepadd  call CGrep( 1, g:MyGrep_SearchPathMode, 1, <q-args>)
+  command! -nargs=* -bang QFRGrep     call RCGrep(0, g:MyGrep_SearchPathMode, 0, <q-args>)
+  command! -nargs=* -bang QFRGrepadd  call RCGrep(0, g:MyGrep_SearchPathMode, 1, <q-args>)
+  command! -nargs=* -bang QFRFGrep    call RCGrep(1, g:MyGrep_SearchPathMode, 0, <q-args>)
+  command! -nargs=* -bang QFRFGrepadd call RCGrep(1, g:MyGrep_SearchPathMode, 1, <q-args>)
 endif
 
 command! -nargs=? -bang QFBGrep call BGrep(<q-args>, <bang>0, 0)
-command! -nargs=? -bang QFVGrep call VGrep(<q-args>, <bang>0, 0)
+command! -nargs=? -bang QFVGrep call VGrep(<q-args>, g:MyGrep_SearchPathMode, 0)
 
 command! -nargs=? -bang QFBGrepadd call BGrep(<q-args>, <bang>0, 1)
-command! -nargs=? -bang QFVGrepadd call VGrep(<q-args>, <bang>0, 1)
+command! -nargs=? -bang QFVGrepadd call VGrep(<q-args>, g:MyGrep_SearchPathMode, 1)
 
 if !exists('g:MyGrep_Key')
   let g:MyGrep_Key = 'g'
@@ -252,7 +249,6 @@ autocmd BufWinEnter quickfix exec 'silent! nnoremap <unique> <buffer> <silent> '
 command! -bang ToggleDamemoji let MyGrep_Damemoji = <bang>0?2:!MyGrep_Damemoji|echo 'Damemoji '.(MyGrep_Damemoji?'ON':'OFF')
 
 """"""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""
 function! VGrep(word, mode, addflag)
   let addflag = a:addflag
   let title = 'Vimgrep'
@@ -264,12 +260,12 @@ function! VGrep(word, mode, addflag)
 endfunction
 
 """"""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""
 function! RFGrep(word, mode, addflag)
   let g:MyGrep_Recursive = 1
   return FGrep(a:word, a:mode, a:addflag)
 endfunction
 
+""""""""""""""""""""""""""""""
 function! FGrep(word, mode, addflag)
   let addflag = a:addflag
   let title = 'FGrep'
@@ -285,7 +281,6 @@ function! FGrep(word, mode, addflag)
 endfunction
 
 """"""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""
 function! UGrep(cmd, args, mode, addflag)
   if a:args == ''
     if a:cmd == 'grep'
@@ -296,7 +291,7 @@ function! UGrep(cmd, args, mode, addflag)
       return Grep('', a:mode, title, a:addflag)
     elseif a:cmd == 'grep -F'
       return FGrep('', a:mode, a:addflag)
-    elseif a:cmd == 'vimgrep'
+    elseif a:cmd =~ 'vimgrep'
       return VGrep('', a:mode, a:addflag)
     endif
     return Grep('', a:mode, title, a:addflag)
@@ -312,10 +307,11 @@ function! UGrep(cmd, args, mode, addflag)
   let bufnr = bufnr('%')
   let save_cursor = getpos('.')
   if addflag == 0
-    silent! cexpr ''
+    let ccmd = g:QFix_UseLocationList ? 'lexpr ""' : 'cexpr ""'
+    exec ccmd
   endif
-  call s:MyGrepPclose()
-  silent! cclose
+  call QFixPclose()
+  call QFixCclose()
   if g:QFix_SearchPath != ''
 "    silent exec 'lchdir ' . escape(g:QFix_SearchPath, ' ')
   endif
@@ -323,16 +319,15 @@ function! UGrep(cmd, args, mode, addflag)
     let g:QFix_SearchPath = disppath
   endif
 
-  let cmd = a:cmd.' '. a:args
+  let cmd = a:cmd
+  if cmd =~ 'vimgrep' && g:QFix_UseLocationList
+    let cmd = 'l'.cmd
+  endif
+  let cmd = cmd.' '. a:args
   exec cmd
-"  cclose
-  let g:QFix_Modified = 1
-"  echom retval
-  let g:QFix_MyJump = 1
   let g:QFix_SelectedLine = 1
   let g:QFix_SearchResult = []
-  let save_qflist = getqflist()
-  let g:QFixPrevQFList = save_qflist
+  let save_qflist = QFixGetqflist()
   if empty(save_qflist)
     redraw | echo 'QFixGrep : Not found!'
   else
@@ -345,7 +340,6 @@ function! UGrep(cmd, args, mode, addflag)
 endfunction
 
 """"""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""
 function! RGrep(word, mode, title, addflag)
   let g:MyGrep_Recursive = 1
   let title = a:title
@@ -353,6 +347,7 @@ function! RGrep(word, mode, title, addflag)
   return Grep(a:word, a:mode, title, a:addflag)
 endfunction
 
+""""""""""""""""""""""""""""""
 function! Grep(word, mode, title, addflag)
   let addflag = a:addflag
   let pattern = a:word
@@ -408,8 +403,7 @@ function! Grep(word, mode, title, addflag)
   if fenc == ''
     let fenc = &enc
   endif
-  let prevPath = getcwd()
-  let prevPath = escape(prevPath, ' ')
+  let prevPath = escape(getcwd(), ' ')
   if a:addflag && g:QFix_SearchPath != ''
     let disppath = g:QFix_SearchPath
   else
@@ -419,13 +413,13 @@ function! Grep(word, mode, title, addflag)
   if exists('*QFixSaveHeight')
     call QFixSaveHeight(0)
   endif
-  call s:MyGrepPclose()
-  silent! cclose
+  call QFixPclose()
+  call QFixCclose()
   call MyGrep(pattern, searchPath, filepattern, fenc, addflag)
   if g:QFix_SearchPath != ''
 "    silent exec 'lchdir ' . escape(g:QFix_SearchPath, ' ')
   endif
-  let save_qflist = getqflist()
+  let save_qflist = QFixGetqflist()
   if empty(save_qflist)
     redraw | echo 'QFixGrep : Not found!'
     echo pattern.' | '.fenc.' | '.filepattern.' | '. searchPath
@@ -467,8 +461,6 @@ function! BGrep(word, mode, addflag)
     endif
     let pattern = input(mes, pattern)
   endif
-"  let pattern = escape(pattern, '\\/.*$^~[]')
-"  let pattern = substitute(pattern, '\n$', '', '')
   if pattern == '' | return | endif
   if a:addflag && g:QFix_SearchPath != ''
     let disppath = g:QFix_SearchPath
@@ -482,22 +474,20 @@ function! BGrep(word, mode, addflag)
   let bufnr = bufnr('%')
   let save_cursor = getpos('.')
   if a:addflag == 0
-    silent! cexpr ''
+    let ccmd = g:QFix_UseLocationList ? 'lexpr ""' : 'cexpr ""'
+    exec ccmd
   endif
-  call s:MyGrepPclose()
-  silent! cclose
-  if g:QFix_SearchPath != ''
-"    silent exec 'lchdir ' . escape(g:QFix_SearchPath, ' ')
-  endif
-  silent! exec ':bufdo | try | vimgrepadd /' . pattern . '/j % | catch | endtry'
+  call QFixPclose()
+  call QFixCclose()
+  let vopt = g:QFix_UseLocationList ? 'l' : ''
+  silent! exec ':bufdo | try | '.vopt.'vimgrepadd /' . pattern . '/j % | catch | endtry'
   silent! exec 'b'.bufnr
   if a:addflag
     let g:QFix_SearchPath = disppath
   endif
-  let g:QFix_MyJump = 1
   let g:QFix_SelectedLine = 1
   let g:QFix_SearchResult = []
-  let save_qflist = getqflist()
+  let save_qflist = QFixGetqflist()
   if empty(save_qflist)
     redraw | echo 'QFixGrep : Not found!'
   else
@@ -553,10 +543,15 @@ endif
 if !exists('g:QFix_SearchPath')
   let g:QFix_SearchPath = ''
 endif
+if !exists('g:QFix_UseLocationList')
+  let g:QFix_UseLocationList = 0
+endif
 
 let g:MyGrep_cmdopt = ''
 "一時的にvimgrepを使用したいときに非0。使用後リセットされる。
 let g:MyGrep_UseVimgrep = 0
+"quickfixに登録しない
+let g:MyGrep_Return = 0
 
 """"""""""""""""""""""""""""""
 "汎用Grep関数
@@ -571,8 +566,7 @@ function! MyGrep(pattern, searchPath, filepattern, fenc, addflag, ...)
   let addflag = a:addflag
   let searchPath = a:searchPath
   let pattern = a:pattern
-  let prevPath = getcwd()
-  let prevPath = escape(prevPath, ' ')
+  let prevPath = escape(getcwd(), ' ')
   let g:MyGrep_ErrorMes = ''
   if g:MyGrep_ExcludeReg == ''
     let g:MyGrep_ExcludeReg = '^$'
@@ -600,17 +594,17 @@ function! MyGrep(pattern, searchPath, filepattern, fenc, addflag, ...)
     endif
   endif
   if g:mygrepprg == 'internal' || g:mygrepprg == '' || g:MyGrep_UseVimgrep != 0
-    let pattern = escape(pattern, '/')
     silent exec 'lchdir ' . escape(searchPath, ' ')
+    let pattern = escape(pattern, '/')
+    let vopt = g:QFix_UseLocationList ? 'l' : ''
     if addflag
-      silent! exec ':vimgrepadd /' . pattern . '/j ' . a:filepattern
+      silent! exec ':'.vopt.'vimgrepadd /' . pattern . '/j ' . a:filepattern
     else
-      silent! cexpr ''
-      silent! exec ':vimgrep /' . pattern . '/j ' . a:filepattern
+      silent! exec ':'.vopt.'vimgrep /' . pattern . '/j ' . a:filepattern
     endif
     "ここでバッファ削除
     let idx = 0
-    let save_qflist = getqflist()
+    let save_qflist = QFixGetqflist()
     for d in save_qflist
       if bufname(d.bufnr) =~ g:MyGrep_ExcludeReg
         call remove(save_qflist, idx)
@@ -619,7 +613,7 @@ function! MyGrep(pattern, searchPath, filepattern, fenc, addflag, ...)
         let idx = idx + 1
       endif
     endfor
-    call MyGrepSetqflist(save_qflist)
+    call QFixSetqflist(save_qflist)
     if g:MyGrep_StayGrepDir == 0
       silent exec 'lchdir ' . prevPath
     endif
@@ -627,16 +621,20 @@ function! MyGrep(pattern, searchPath, filepattern, fenc, addflag, ...)
     let g:MyGrep_Ignorecase = 1
     let g:MyGrep_Recursive  = 0
     let g:MyGrep_UseVimgrep = 0
-    " MyQFixライブラリを使用可能にする。
-    call QFixEnable(searchPath)
     if g:MyGrep_ErrorMes != ''
       echohl ErrorMsg
       redraw | echo g:MyGrep_ErrorMes
       echohl None
     endif
+    if g:MyGrep_Return
+      let g:MyGrep_Return = 0
+      return save_qflist
+    endif
+    call QFixEnable(searchPath)
     return
   endif
 
+  let ccmd = g:QFix_UseLocationList ? 'lexpr ""' : 'cexpr ""'
   let l:mygrepprg = expand(g:mygrepprg)
   if !executable(l:mygrepprg)
     echohl ErrorMsg
@@ -670,7 +668,7 @@ function! MyGrep(pattern, searchPath, filepattern, fenc, addflag, ...)
       let pp = substitute(pp, '[\\.()?+{}\[\]*]', '', 'g')
       if pp =~ '^\s*$'
         let g:MyGrep_ErrorMes = "ダメ文字しか含まれていません!"
-        silent! cexpr ''
+        silent! exec ccmd
         let g:MyGrep_Regexp = 1
         let g:MyGrep_Ignorecase = 1
         let g:MyGrep_Recursive  = 0
@@ -695,17 +693,24 @@ function! MyGrep(pattern, searchPath, filepattern, fenc, addflag, ...)
   let file = ''
   redraw|echo 'QFixGrep : Parsing...'
   let g:MyGrep_qflist = s:ParseSearchResult(searchPath, retval, pattern, g:MyGrep_ShellEncoding, a:fenc)
+  if g:MyGrep_Return
+    let g:MyGrep_Return = 0
+    if g:MyGrep_StayGrepDir == 0
+      silent exec 'lchdir ' . prevPath
+    endif
+    redraw|echo ''
+    return g:MyGrep_qflist
+  endif
   if a:0
     redraw|echo ''
   else
     redraw|echo 'QFixGrep : Set quickfix list...'
     let flag = addflag ? 'a' : ' '
-    call setqflist(g:MyGrep_qflist, flag)
+    call QFixSetqflist(g:MyGrep_qflist, flag)
   endif
   if g:MyGrep_StayGrepDir == 0
     silent exec 'lchdir ' . prevPath
   endif
-  " MyQFixライブラリを使用可能にする。
   call QFixEnable(searchPath)
   redraw | echo ''
   if g:MyGrep_ErrorMes != ''
@@ -764,13 +769,12 @@ endfunction
 """"""""""""""""""""""""""""""
 function! s:ExecGrep(cmd, prg, searchPath, searchWord, from_encoding, to_encoding, filepattern)
   " iconv が使えない
-"  if a:from_encoding != a:to_encoding && !has('iconv')
-""    echoe 'QFixGrep : not found iconv!'
-"    let g:MyGrep_ErrorMes = 'QFixGrep : Not found iconv!'
-"    let choice = confirm(g:MyGrep_ErrorMes, "&OK")
-""    return
-"  endif
-
+  "  if a:from_encoding != a:to_encoding && !has('iconv')
+  "    echoe 'QFixGrep : not found iconv!'
+  "    let g:MyGrep_ErrorMes = 'QFixGrep : Not found iconv!'
+  "    let choice = confirm(g:MyGrep_ErrorMes, "&OK")
+  "    return
+  "  endif
   let cmd = a:cmd
   " プログラム設定
   let prg = fnamemodify(a:prg, ':t')
@@ -820,7 +824,6 @@ function! s:ExecGrep(cmd, prg, searchPath, searchWord, from_encoding, to_encodin
 
   " 検索語ファイル作成
   if match(cmd, '#searchWordFile#') != -1
-"    let g:qfixtempname = tempname()
     let searchWord = iconv(a:searchWord, a:from_encoding, a:to_encoding)
     let searchWordList = [searchWord]
     call writefile(searchWordList, g:qfixtempname, 'b')
@@ -832,13 +835,12 @@ function! s:ExecGrep(cmd, prg, searchPath, searchWord, from_encoding, to_encodin
   endif
 
   " 検索実行
-  let prevPath = getcwd()
-  let prevPath = escape(prevPath, ' ')
+  let prevPath = escape(getcwd(), ' ')
   silent exec 'lchdir ' . escape(a:searchPath, ' ')
   silent! let saved_path = $PATH
   let dir = fnamemodify(a:prg, ':h')
   if dir != '.'
-    let dir = fnamemodify(expand(a:prg), ':p:h')
+    let dir = fnamemodify(a:prg, ':p:h')
     let delimiter = has('unix') ? ':' : ';'
     let $PATH = dir.delimiter.$PATH
   endif
@@ -873,9 +875,6 @@ function! s:ParseFilepattern(filepattern)
     let filepattern = substitute(filepattern, '\\|\*', '\\|\.\*', 'g')
     let filepattern = filepattern.'$'
   endif
-  if s:debug
-"    echoe filepattern
-  endif
   return filepattern
 endfunction
 
@@ -892,85 +891,60 @@ function! s:ParseSearchResult(searchPath, searchResult, filepattern, shellenc, f
   let ccnv = a:fenc != &enc
   let qflist = []
   let recheck = 0
-  let prevPath = getcwd()
-  let prevPath = escape(prevPath, ' ')
+  let prevPath = escape(getcwd(), ' ')
 
-  silent! exec 'split '
-  silent! exec 'silent! edit '.g:qfixtempname
-  setlocal buftype=nofile
-  setlocal bufhidden=hide
-  setlocal noswapfile
-  setlocal nobuflisted
-"  exec 'setlocal fileformat='.ff
-  exec 'setlocal fileencoding='.fe
-  silent! %delete _
-  silent! 0put=searchResult
-  silent! $delete _
-  silent exec 'lchdir ' . escape(a:searchPath, ' ')
-  for n in range(1, line('$'))
-    let buf = getline(n)
-    let bufidx = matchend(buf, ':\d\+:', 0, 1)
-    let extidx = match(buf, ':\d\+:', 0, 1)
-    let fname  = strpart(buf, 0, extidx)
-    if fcnv
-      let fname = iconv(fname, a:shellenc, &enc)
-    endif
-    if wipetime > 0
-      if prevfname != fname
-        let qfmtime = getftime(fname)
-        let prevfname = fname
+  for buf in split(searchResult, '\n')
+    while 1
+      let bufidx = matchend(buf, ':\d\+:', 0, 1)
+      if bufidx == -1
+        break
       endif
-      if qfmtime < wipetime
-        continue
+      let extidx = match(buf, ':\d\+:', 0, 1)
+      let fname  = strpart(buf, 0, extidx)
+      if fcnv
+        let fname = iconv(fname, a:shellenc, &enc)
       endif
-    endif
-    let lnum = strpart(buf, extidx+1, bufidx-extidx-2)
-    let content = strpart(buf, bufidx)
-    if ccnv
-      let content = iconv(content, a:fenc, &enc)
-    endif
-    let content = strpart(content, 0, 1024-strlen(fname)-32)
-    if fname =~ a:filepattern && fname !~ g:MyGrep_ExcludeReg
-      call add(qflist, {'filename':fname, 'lnum':lnum, 'text':content})
-    endif
+      let outtime = 0
+      if wipetime > 0
+        if prevfname != fname
+          let qfmtime = getftime(fname)
+          let prevfname = fname
+        endif
+        if qfmtime < wipetime
+          let outtime = 1
+        endif
+      endif
+      let lnum = strpart(buf, extidx+1, bufidx-extidx-2)
+      let text = strpart(buf, bufidx)
+      if ccnv
+        let text = iconv(text, a:fenc, &enc)
+      endif
+      let lst = split(text, '\n')
+      if lst == []
+        break
+      endif
+      let content = lst[0]
+      let content = strpart(content, 0, 1024-strlen(fname)-32)
+      let content = substitute(content, "[\n\r]", "", "")
+      if fname =~ a:filepattern && fname !~ g:MyGrep_ExcludeReg && outtime == 0
+        call add(qflist, {'filename':fname, 'lnum':lnum, 'text':content})
+      endif
+      if lst[0] != text
+        if ccnv
+          let text = iconv(lst[0], &enc, a:fenc)
+        endif
+        let buf = strpart(buf, bufidx + strlen(text))
+        let buf = substitute(buf, '^\n', '', '')
+      else
+        break
+      endif
+    endwhile
   endfor
-  silent! bd!
   silent exec 'lchdir ' . prevPath
   return qflist
 endfunction
 
-""""""""""""""""""""""""""""""
-"quickfixに登録
-""""""""""""""""""""""""""""""
-function! s:SetQFix(result, addflag, file)
-  let result = a:result
-  let tmpfile = a:file
-  if tmpfile != ''
-    let saved_verbose = &verbose
-    set verbose&vim
-    exe 'redir! > ' . tmpfile
-    silent echon result
-    redir END
-    let &verbose = saved_verbose
-    return
-  endif
-
-  let saved_efm = &efm
-  if exists('g:MyGrep_errorformat')
-    let &errorformat = g:MyGrep_errorformat
-  endif
-  if a:addflag
-    caddexpr result
-  else
-    cgetexpr result
-  endif
-  let &errorformat = saved_efm
-  return
-endfunction
-
-""""""""""""""""""""""""""""""
 "正規表現エスケープ
-""""""""""""""""""""""""""""""
 function! s:GrepEscapeVimPattern(pattern)
   let retval = escape(a:pattern, '\\.*+@{}<>~^$()|?[]%=&')
   let retval = retval
@@ -978,51 +952,68 @@ function! s:GrepEscapeVimPattern(pattern)
 endfunction
 
 """"""""""""""""""""""""""""""
-"QFixPcloseが存在する時はpcloseの代わりに使用する
-""""""""""""""""""""""""""""""
-function! s:MyGrepPclose()
-  if exists('*QFixPclose')
-    call QFixPclose()
-  else
-    silent! pclose
-  endif
-endfunction
-
+"代替コマンド
 """"""""""""""""""""""""""""""
 "setqflist代替
-""""""""""""""""""""""""""""""
-function! MyGrepSetqflist(sq)
-  if g:QFix_SearchPath != ''
-"    silent exec 'lchdir ' . escape(g:QFix_SearchPath, ' ')
+silent! function QFixSetqflist(sq, ...)
+  let cmd = 'a:sq'. (a:0 == 0 ? '' : ",'".a:1."'")
+  if g:QFix_UseLocationList
+    exec 'call setloclist(0, '.cmd.')'
+  else
+    exec 'call setqflist('.cmd.')'
   endif
-  let g:QFix_Modified = 1
-  let g:QFixPrevQFList = a:sq
-  return setqflist(a:sq)
 endfunction
 
-function! QFixEnable(path)
-  let g:QFix_SearchPath = a:path
-  let g:QFix_SelectedLine = 1
-  let g:QFix_MyJump = 1
+"getqflist代替
+silent! function QFixGetqflist()
+  if g:QFix_UseLocationList
+    return getloclist(0)
+  else
+    return getqflist()
+  endif
 endfunction
 
-
-""""""""""""""""""""""""""""""
 "copen代替
-""""""""""""""""""""""""""""""
-if !exists('*QFixCopen')
-  command! -nargs=* -bang QFixCopen call QFixCopen(<q-args>, <bang>0)
-  function! QFixCopen(cmd, mode)
-    copen
-  endfunction
-endif
+silent! command -nargs=* -bang QFixCopen call QFixCopen(<q-args>, <bang>0)
+silent! function QFixCopen(cmd, mode)
+  if g:QFix_UseLocationList
+    silent! lopen
+  else
+    silent! copen
+  endif
+endfunction
 
+"cclose代替
+command! QFixCclose call QFixCclose()
+function! QFixCclose()
+  if g:QFix_UseLocationList
+    silent! lclose
+  else
+    silent! cclose
+  endif
+endfunction
+
+"pclose代替
+silent! command QFixPclose call QFixPclose()
+silent! function! QFixPclose()
+  silent! pclose!
+endfunction
+
+" MyGrepReadResult stab
 if !exists('*MyGrepReadResult')
   command! -count -nargs=* -bang MyGrepReadResult call MyGrepReadResult(<bang>0, <q-args>)
   function! MyGrepReadResult(readflag, ...)
     echoe "MyGrepReadResult : cannot read QFixlib!"
   endfunction
 endif
+
+""""""""""""""""""""""""""""""
+" MyQFixライブラリを使用可能にする。
+""""""""""""""""""""""""""""""
+function! QFixEnable(path)
+  let g:QFix_SearchPath = a:path
+  let g:QFix_SelectedLine = 1
+endfunction
 
 """"""""""""""""""""""""""""""
 "コマンドラインからのgrep
@@ -1088,7 +1079,7 @@ function! CGrep(mode, bang, addflag,  arg)
   endif
   let g:MyGrep_cmdopt = opt
   call MyGrep(pattern, path, filepattern, fenc, addflag)
-  let save_qflist = getqflist()
+  let save_qflist = QFixGetqflist()
   if empty(save_qflist)
     redraw | echo 'QFixGrep : Not found!'
     echo pattern.' | '.fenc.' | '.filepattern.' | '. path
@@ -1111,9 +1102,9 @@ endfunction
 function! QFixGrepHelp_()
   silent! exec 'split ' . s:QFixGrep_Helpfile
   setlocal buftype=nofile
-"  setlocal bufhidden=wipe
+  setlocal bufhidden=hide
   setlocal noswapfile
-"  setlocal nobuflisted
+  "setlocal nobuflisted
   call setline(1, g:QFixGrepHelpList)
   call cursor(1,1)
 endfunction

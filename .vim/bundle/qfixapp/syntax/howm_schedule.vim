@@ -59,41 +59,8 @@ syntax match txtFile '\([A-Za-z]:[/\\]\|\~\/\)[-0-9a-zA-Z;/?:@&=+$,_.!~*'()%{}[\
 syntax match txtFile '\[:\?&\?\zs\([A-Za-z]:[/\\]\|\~\/\)[^:]\+\ze:[^\]]*]'
 syntax match txtUrl  '\[:\?&\?\zs\(howm\|rel\|https\|http\|ftp\|file\)://[^:]\+\ze:[^\]]*]'
 
-hi def link outlineTitle                Type
-hi def link actionlockLink              Underlined
-hi def link actionlockKeyword           Underlined
-hi def link actionlockMacroAction       Underlined
-hi def link actionlockMacroActionDefine howmFinished
-hi def link actionlockList              Type
-hi def link recentmodeDate              howmFinished
-hi def link howmTitle                   Title
-hi def link howmTitleDesc               Special
-hi def link howmCategory                Label
-hi def link howmEntrySeparator          Special
-
-if exists('g:QFixHowm_Title') && exists('g:QFixHowm_EscapeTitle')
-  let s:QFixHowm_Title = escape(g:QFixHowm_Title, g:QFixHowm_EscapeTitle)
-  exe 'syn region howmTitle start="^'.s:QFixHowm_Title.'" end="$" contains=howmTitleDesc,howmCategory'
-  exe 'syn match howmTitleDesc contained "^'.s:QFixHowm_Title.'"'
-  syn match howmCategory contained +\(\[.\{-}\]\)\++
-  exec 'syntax match outlineTitle "^'.s:QFixHowm_Title.'\{2,}"'
+" for changelog
+if exists('b:current_syntax') && b:current_syntax == "changelog"
+  syn region	changelogFiles	start="^\s\+[+*]\s" end=":\s" end="^$" contains=changelogBullet,changelogColon,changelogError,howmSchedule,howmDeadline,howmTodo,howmReminder,howmTodoUD,howmFinished keepend
 endif
-
-if exists('g:QFixHowm_MergeEntrySeparator')
-  exe 'syntax match howmEntrySeparator ' . '"^'.g:QFixHowm_MergeEntrySeparator.'"'
-endif
-if exists('g:QFixHowm_Link')
-  exe 'syntax match actionlockLink ' . '"'.g:QFixHowm_Link.'[^[:return:]].*"'
-endif
-if exists('g:QFixHowm_keyword') && g:QFixHowm_keyword != ''
-  exe 'syntax match actionlockKeyword "\V\%('.g:QFixHowm_keyword.'\)"'
-endif
-if exists('g:QFixHowm_MacroActionKey') && exists('g:QFixHowm_MacroActionPattern')
-  if g:QFixHowm_MacroActionKey != '' && g:QFixHowm_MacroActionPattern != ''
-    exe 'syntax match actionlockMacroAction "^.*'.g:QFixHowm_MacroActionPattern.'.*$" contains=actionlockMacroActionDefine'
-    exe 'syntax match actionlockMacroActionDefine "'.g:QFixHowm_MacroActionPattern.'.*$"'
-  endif
-endif
-
-syntax match actionlockList "{[- *_]}"
 
