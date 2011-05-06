@@ -173,3 +173,6 @@ elseif has('mac')
   let mygrepprg = 'grep'
   let MyGrep_ShellEncoding = 'utf-8'
 endif
+
+" vimshell
+noremap <Leader>ss :VimShell<CR>
