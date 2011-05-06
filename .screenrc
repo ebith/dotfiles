@@ -4,7 +4,7 @@ encoding utf-8 utf-8
 autodetach on
 bell_msg "^G"
 defscrollback 10000
-escape ^Aa
+escape ^Zz
 startup_message off
 vbell off
 
@@ -12,12 +12,10 @@ sorendition "= ck"
 caption always "%{= ck} %?%h%:%t (screen #%n)%?"
 hardstatus alwayslastline "%{= dd} %-w%{= gk}%n %t%{-}%+w %= %{= dm}%m/%0d %0C %A"
 
-bind t screen
-bind T title
+bind t title
 bind h prev
 bind l next
 bind w windowlist -b
-bind s
 bind ; colon
 
 bindkey "^[[1;5I" next
