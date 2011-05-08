@@ -132,6 +132,8 @@ inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
+inoremap <expr><C-f>  neocomplcache#manual_filename_complete()
+
 augroup neocomplcache
   autocmd!
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
