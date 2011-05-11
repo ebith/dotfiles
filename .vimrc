@@ -148,17 +148,15 @@ augroup END
 " let g:yankring_n_keys = 'Y D'
 
 " Unite
-let g:unite_enable_start_insert=1
-noremap <Leader>ub :Unite buffer -default-action=tabopen<CR>
-noremap <Leader>uu :Unite buffer file_mru -default-action=tabopen<CR>
-noremap <Leader>ue :Unite -buffer-name=files buffer file_mru everything -default-action=tabopen<CR>
-noremap <Leader>ur :Unite -buffer-name=register register<CR>
-noremap <Leader>uh :Unite help:ja<CR>
+" let g:unite_enable_start_insert=1
+noremap <Leader>ub :Unite buffer<CR>
 noremap <Leader>uc :Unite history/command<CR>
+noremap <Leader>ue :Unite -buffer-name=files buffer file_mru everything<CR>
+noremap <Leader>uf :Unite -buffer-name=files buffer file_mru<CR>
+noremap <Leader>uh :Unite help:ja<CR>
+noremap <Leader>ur :Unite -buffer-name=register register<CR>
 noremap <Leader>us :Unite history/search<CR>
-
-noremap t :Unite buffer file_mru -default-action=tabopen<CR>
-noremap T :Unite -buffer-name=files buffer file_mru everything -default-action=tabopen<CR>
+noremap <Leader>uu :Unite buffer file_mru<CR>
 
 " howm
 let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.howm'
