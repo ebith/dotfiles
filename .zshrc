@@ -49,12 +49,18 @@ zstyle ':completion:*' list-colors 'di=01;34' 'ln=01;35' 'so=01;32' 'ex=01;31' '
 alias screen="screen -xRU"
 
 case "${OSTYPE}" in
-freebsd*|darwin*)
-alias ls="ls -G -aFw"
+  cygwin*)
+    alias open="cygstart"
 ;;
-cygwin|linux*)
-alias ls="ls --color -aF"
-;;
+esac
+
+case "${OSTYPE}" in
+  freebsd*|darwin*)
+    alias ls="ls -G -aFw"
+  ;;
+  cygwin|linux*)
+    alias ls="ls --color -aF"
+  ;;
 esac
 alias ll="ls -aFl"
 
@@ -62,15 +68,13 @@ alias L="| less -R"
 
 alias h="history -20"
 
-function psx {
-ps aux| head -1 && ps aux | grep $1 | sed -e '/grep/d'
-};
+function psx { ps aux| head -1 && ps aux | grep $1 | sed -e '/grep/d' };
 
 #Homebrew
 case "${OSTYPE}" in
-darwin*)
+  darwin*)
     export PATH=/usr/local/bin:$PATH
-;;
+  ;;
 esac
 
 export LANG=ja_JP.UTF-8
@@ -79,11 +83,11 @@ export TERM=xterm-256color
 
 #ターミナルのタイトルを設定する
 case "${TERM}" in
-kterm*|xterm*)
+  kterm*|xterm*)
     precmd() {
-        echo -ne "\033]0;${HOST%%.*}:${PWD}\007"
+      echo -ne "\033]0;${HOST%%.*}:${PWD}\007"
     }
-    ;;
+  ;;
 esac
 
 #GitとかMercurialの情報を表示する
@@ -91,9 +95,9 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats '(%s)-[%b]'
 zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
 precmd () {
-    psvar=()
-    LANG=en_US.UTF-8 vcs_info
-    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+  psvar=()
+  LANG=en_US.UTF-8 vcs_info
+  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 PROMPT="
 %{${fg[blue]}%}[%~]%{${reset_color}%}
