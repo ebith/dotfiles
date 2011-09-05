@@ -4,12 +4,12 @@
 [color]
   ui = true
 [diff]
-  external = ~/dotfiles/git_diff_wrapper
+  # external = ~/dotfiles/git_diff_wrapper
 [pager]
-  diff =
+  # diff =
 [alias]
-  b = branch
-  ci = commit
+  br = branch
+  ci = commit -v
   co = checkout
   ls = log --stat
   sm = submodule
@@ -17,3 +17,9 @@
   up = pull --rebase
 [core]
   excludesfile = ~/.gitignore.global
+  filemode = false
+  autocrlf = false
+  safecrlf = false
+  quotepath = false
+[i18n]
+  commitencoding = UTF-8
