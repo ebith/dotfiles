@@ -160,6 +160,7 @@ noremap <Leader>uu :Unite buffer file_mru<CR>
 
 " howm
 let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.howm'
+let QFixHowm_DiaryFile = 'diary/%Y/%m/%Y-%m-%d-000000.howm'
 let howm_fileencoding = 'utf-8'
 let howm_fileformat = 'unix'
 if has('win32') || has('win64')
