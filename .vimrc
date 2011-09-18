@@ -177,3 +177,7 @@ endif
 
 " vimshell
 noremap <Leader>ss :VimShell<CR>
+
+" gist-vim
+let g:github_user = 'ebith'
+let g:github_token = '6a5290de143c2fea5bca97ad900bc116'
