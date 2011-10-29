@@ -68,7 +68,7 @@ alias L="| less -R"
 
 alias h="history -20"
 
-function psx { ps aux| head -1 && ps aux | grep $1 | sed -e '/grep/d' };
+function psx { ps aux| head -1 && ps aux | grep -i $1 | sed -e '/grep/d' };
 
 #Homebrew
 case "${OSTYPE}" in
