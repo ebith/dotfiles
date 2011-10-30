@@ -15,6 +15,7 @@
   sm = submodule
   st = status
   up = pull --rebase
+  amend = commit --amend -C HEAD
 [core]
   excludesfile = ~/.gitignore.global
   filemode = false
