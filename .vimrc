@@ -75,6 +75,7 @@ set cursorline
 set fileformats=unix,dos,mac
 set enc=utf-8
 set fileencodings=utf-8,cp932,euc-jp
+language message ja_JP.UTF-8
 
 "ステータスラインを常に表示
 set laststatus=2
@@ -164,10 +165,10 @@ let QFixHowm_DiaryFile = 'diary/%Y/%m/%Y-%m-%d-000000.howm'
 let howm_fileencoding = 'utf-8'
 let howm_fileformat = 'unix'
 if has('win32') || has('win64')
-  let howm_dir = 'C:\dropbox/document/howm'
-  let QFixMRU_Filename = 'C:\dropbox\document\howm\.howm-mru'
-  let mygrepprg = 'C:/bin/Cygwin/bin/grep'
-  let $CYGWIN = 'nodosfilewarning'
+  let howm_dir = 'C:\usr/dropbox/document/howm'
+  let QFixMRU_Filename = 'C:\usr\dropbox\document\howm\.howm-mru'
+  " let mygrepprg = 'C:/bin/Cygwin/bin/grep'
+  " let $CYGWIN = 'nodosfilewarning'
 elseif has('mac')
   let howm_dir = '~/Dropbox/document/howm'
   let QFixMRU_Filename = '~/Dropbox/document/howm/.howm-mru'
