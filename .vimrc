@@ -96,6 +96,10 @@ set viminfo& viminfo+=n~/.viminfo
 " help引いたらフリーズする
 set notagbsearch
 
+" putty経由でもマウス
+set mouse=a
+set ttymouse=xterm2
+
 " mapping
 " ========================================
 let mapleader = ","
