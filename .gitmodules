@@ -52,3 +52,6 @@
 [submodule ".vim/bundle/gist-vim"]
 	path = .vim/bundle/gist-vim
 	url = git://github.com/mattn/gist-vim.git
+[submodule ".vim/bundle/open-browser.vim"]
+	path = .vim/bundle/open-browser.vim
+	url = git://github.com/tyru/open-browser.vim.git
