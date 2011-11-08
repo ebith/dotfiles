@@ -180,9 +180,15 @@ noremap <Leader>ss :VimShell<CR>
 
 " gist-vim
 let g:github_user = 'ebith'
-let g:github_token = '6a5290de143c2fea5bca97ad900bc116'
+let g:github_token = 'xxxxx'
 
 " open-browser.vim
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
+
+" ========================================
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
+
