@@ -154,14 +154,14 @@ augroup END
 
 " Unite
 " let g:unite_enable_start_insert=1
-noremap <Leader>ub :Unite buffer<CR>
+noremap <Leader>ub :Unite buffer -default-action=tabopen<CR>
 noremap <Leader>uc :Unite history/command<CR>
-noremap <Leader>ue :Unite -buffer-name=files buffer file_mru everything<CR>
-noremap <Leader>uf :Unite -buffer-name=files buffer file_mru<CR>
+noremap <Leader>ue :Unite -buffer-name=everything buffer file_mru everything -default-action=tabopen<CR>
+noremap <Leader>uf :UniteWithBufferDir -buffer-name=files file -default-action=tabopen<CR>
 noremap <Leader>uh :Unite help:ja<CR>
 noremap <Leader>ur :Unite -buffer-name=register register<CR>
 noremap <Leader>us :Unite history/search<CR>
-noremap <Leader>uu :Unite buffer file_mru<CR>
+noremap <Leader>uu :Unite buffer file_mru -default-action=tabopen<CR>
 
 " howm
 let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.howm'
