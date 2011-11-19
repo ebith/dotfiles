@@ -154,14 +154,22 @@ augroup END
 
 " Unite
 " let g:unite_enable_start_insert=1
-noremap <Leader>ub :Unite buffer -default-action=tabopen<CR>
+noremap <Leader>ub :Unite buffer<CR>
 noremap <Leader>uc :Unite history/command<CR>
-noremap <Leader>ue :Unite -buffer-name=everything buffer file_mru everything -default-action=tabopen<CR>
-noremap <Leader>uf :UniteWithBufferDir -buffer-name=files file -default-action=tabopen<CR>
+noremap <Leader>ue :Unite -buffer-name=everything buffer file_mru everything<CR>
+noremap <Leader>uf :UniteWithBufferDir -buffer-name=files file<CR>
 noremap <Leader>uh :Unite help:ja<CR>
 noremap <Leader>ur :Unite -buffer-name=register register<CR>
 noremap <Leader>us :Unite history/search<CR>
-noremap <Leader>uu :Unite buffer file_mru -default-action=tabopen<CR>
+noremap <Leader>uu :Unite buffer file_mru<CR>
+
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+  nmap <silent><buffer> <ESC><ESC> q
+  imap <silent><buffer> <ESC><ESC> <ESC>q
+  nnoremap <silent><buffer><expr> t   unite#smart_map('t', unite#do_action('tabopen'))
+  inoremap <silent><buffer><expr> t   unite#smart_map('t', unite#do_action('tabopen'))
+endfunction
 
 " howm
 let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.howm'
