@@ -203,8 +203,9 @@ vmap gx <Plug>(openbrowser-smart-search)
 " Align
 let g:Align_xstrlen=3
 
+" zencoding-vim
+let g:user_zen_settings = { 'indentation':'  ' }
 " ========================================
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
-
