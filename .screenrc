@@ -33,3 +33,7 @@ bind r eval 'echo "Resize window"' 'command -c resize'
 bind -c resize ^]  command
 bind -c resize j eval 'resize +1' 'command -c resize'
 bind -c resize k eval 'resize -1' 'command -c resize'
+
+#ウインドウは1から始める
+screen 1
+bind c eval 'screen 1'
