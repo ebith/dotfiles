@@ -154,6 +154,7 @@ augroup END
 
 " Unite
 " let g:unite_enable_start_insert=1
+let g:unite_source_history_yank_enable = 1
 noremap <Leader>ub :Unite buffer<CR>
 noremap <Leader>uc :Unite history/command<CR>
 noremap <Leader>ue :Unite -buffer-name=everything buffer file_mru everything<CR>
@@ -162,6 +163,7 @@ noremap <Leader>uh :Unite help:ja<CR>
 noremap <Leader>ur :Unite -buffer-name=register register<CR>
 noremap <Leader>us :Unite history/search<CR>
 noremap <Leader>uu :Unite buffer file_mru<CR>
+noremap <Leader>uy :Unite history/yank<CR>
 
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
