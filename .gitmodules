@@ -64,3 +64,6 @@
 [submodule ".vim/bundle/vim-colors-solarized"]
 	path = .vim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule ".vim/bundle/singleton.vim"]
+	path = .vim/bundle/singleton.vim
+	url = git://github.com/thinca/vim-singleton.git
