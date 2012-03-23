@@ -108,4 +108,11 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 
 SPROMPT="correct: %R -> %r ? "
 
+# z.sh
+_Z_CMD=j
+source ~/.zsh/z.sh
+precmd() {
+  _z --add "$(pwd -P)"
+}
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
