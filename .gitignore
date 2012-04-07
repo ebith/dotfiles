@@ -1,6 +1,1 @@
 .DS_Store
-
-.vimundo/
-.vim/.netrwhist
-.vim/bundle/default
-.vim/autoload/pathogen.vim
