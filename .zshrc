@@ -108,11 +108,7 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 
 SPROMPT="correct: %R -> %r ? "
 
-# z.sh
-_Z_CMD=j
-source ~/.zsh/z.sh
-precmd() {
-  _z --add "$(pwd -P)"
-}
+# autojump
+[[ -s ~/.autojump/etc/profile.d/autojump.zsh ]] && source ~/.autojump/etc/profile.d/autojump.zsh
 
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
