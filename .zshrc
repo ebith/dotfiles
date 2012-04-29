@@ -114,3 +114,4 @@ SPROMPT="correct: %R -> %r ? "
 # tmux
 [ -n "$TMUX" ] && export TERM=screen-256color
 
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
