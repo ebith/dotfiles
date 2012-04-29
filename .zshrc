@@ -111,4 +111,6 @@ SPROMPT="correct: %R -> %r ? "
 # autojump
 [[ -s ~/.autojump/etc/profile.d/autojump.zsh ]] && source ~/.autojump/etc/profile.d/autojump.zsh
 
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+# tmux
+[ -n "$TMUX" ] && export TERM=screen-256color
+
