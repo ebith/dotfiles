@@ -1,6 +1,6 @@
 [user]
   name = ebith
-  email = ebith@feelmy.net
+  email = ebith.h@gmail.com
 [color]
   ui = true
 [diff]
@@ -17,6 +17,7 @@
   up = pull --rebase
   amend = commit --amend -C HEAD
 [core]
+  editor = vim
   excludesfile = ~/.gitignore.global
   filemode = false
   autocrlf = false
