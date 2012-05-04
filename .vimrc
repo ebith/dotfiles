@@ -73,6 +73,10 @@ noremap : ;
 "Enterで改行
 noremap <CR> o<ESC>
 
+" command
+" ========================================
+command Sudow :w !sudo tee >/dev/null %
+
 " ========================================
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
