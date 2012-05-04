@@ -109,7 +109,8 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 SPROMPT="correct: %R -> %r ? "
 
 # autojump
-[[ -s ~/.autojump/etc/profile.d/autojump.zsh ]] && source ~/.autojump/etc/profile.d/autojump.zsh
+[[ -s ~/.autojump/etc/profile.d/autojump.zsh ]] && source ~/.autojump/etc/profile.d/autojump.zsh # for OS X
+[[ -s /usr/share/autojump/autojump.sh ]] && source /usr/share/autojump/autojump.sh  # for Ubuntu
 
 # tmux
 [ -n "$TMUX" ] && export TERM=screen-256color
