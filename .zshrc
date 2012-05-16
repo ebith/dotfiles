@@ -14,6 +14,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
+setopt rm_star_wait         # rm *すると確認
 setopt hist_ignore_dups     # ignore duplication command history list
 setopt share_history        # share command history data
 setopt auto_cd              # cd無くてもcdする
