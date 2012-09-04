@@ -14,6 +14,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
+setopt rm_star_wait         # rm *すると確認
 setopt hist_ignore_dups     # ignore duplication command history list
 setopt share_history        # share command history data
 setopt auto_cd              # cd無くてもcdする
@@ -108,11 +109,11 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 
 SPROMPT="correct: %R -> %r ? "
 
-# z.sh
-_Z_CMD=j
-source ~/.zsh/z.sh
-precmd() {
-  _z --add "$(pwd -P)"
-}
+# autojump
+[[ -s ~/.autojump/etc/profile.d/autojump.zsh ]] && source ~/.autojump/etc/profile.d/autojump.zsh # for OS X
+[[ -s /usr/share/autojump/autojump.sh ]] && source /usr/share/autojump/autojump.sh  # for Ubuntu
+
+# tmux
+[ -n "$TMUX" ] && export TERM=screen-256color
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
