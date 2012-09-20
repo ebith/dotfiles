@@ -57,13 +57,13 @@ esac
 
 case "${OSTYPE}" in
   freebsd*|darwin*)
-    alias ls="ls -G -aFw"
+    alias ls="ls -G -aF"
   ;;
   cygwin|linux*)
     alias ls="ls --color -aF"
   ;;
 esac
-alias ll="ls -aFl"
+alias ll="ls -lh"
 
 alias L="| less -R"
 
