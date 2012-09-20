@@ -17,6 +17,7 @@
   up = pull --rebase
   amend = commit --amend -C HEAD
 [core]
+  whitespace = cr-at-eol
   editor = vim
   excludesfile = ~/.gitignore.global
   filemode = false
