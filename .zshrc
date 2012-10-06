@@ -2,14 +2,10 @@
 fpath=($HOME/.zsh/functions $fpath)
 autoload -U compinit; compinit
 
-#gitの補完
-#autoload -U bashcompinit; bashcompinit
-# source .zsh/git-completion.bash
-
-#$colors[red]とか書けるようになる
+# $colors[red]とか書けるようになる
 autoload -U colors; colors
 
-#履歴関係
+# 履歴関係
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -24,17 +20,17 @@ setopt list_packed
 setopt noautoremoveslash
 setopt complete_aliases
 
-#URLを自動エスケープ
+# URLを自動エスケープ
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
-#=のあともパス名保管する
+# =のあともパス名保管する
 setopt magic_equal_subst
 
-#historyを上書きではなく追記する
+# historyを上書きではなく追記する
 setopt append_history
 
-#賢く履歴を辿る
+# 賢く履歴を辿る
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -46,7 +42,7 @@ export LSCOLORS=exfxcxdxbxegedabagacad
 export LS_COLORS='di=01;34:ln=01;35:so=01;32:pi=01;33:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*' list-colors 'di=01;34' 'ln=01;35' 'so=01;32' 'ex=01;31' 'bd=46;34' 'cd=43;34'
 
-#alias
+# alias
 alias screen="screen -xRU"
 
 case "${OSTYPE}" in
@@ -71,7 +67,7 @@ alias h="history -20"
 
 function psx { ps aux| head -1 && ps aux | grep -i $1 | sed -e '/grep/d' };
 
-#Homebrew
+# Homebrew
 case "${OSTYPE}" in
   darwin*)
     export PATH=/usr/local/bin:$PATH
@@ -82,7 +78,7 @@ export LANG=ja_JP.UTF-8
 export SCREENDIR=~/.screen
 export TERM=xterm-256color
 
-#ターミナルのタイトルを設定する
+# ターミナルのタイトルを設定する
 case "${TERM}" in
   kterm*|xterm*)
     precmd() {
@@ -91,7 +87,7 @@ case "${TERM}" in
   ;;
 esac
 
-#バージョン管理システムの情報を表示する
+# バージョン管理システムの情報を表示する
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' formats '[%b]'
@@ -115,5 +111,7 @@ SPROMPT="correct: %R -> %r ? "
 
 # tmux
 [ -n "$TMUX" ] && export TERM=screen-256color
+
+export PATH=~/bin:$PATH
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
