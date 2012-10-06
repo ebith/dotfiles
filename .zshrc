@@ -1,5 +1,6 @@
 # Created by newuser for 4.3.2
 fpath=($HOME/.zsh/functions $fpath)
+[[ -d /usr/local/share/zsh/site-functions ]] && fpath=(/usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit; compinit
 
 # $colors[red]とか書けるようになる
