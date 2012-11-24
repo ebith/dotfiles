@@ -21,10 +21,6 @@ setopt list_packed
 setopt noautoremoveslash
 setopt complete_aliases
 
-# URLを自動エスケープ
-autoload -U url-quote-magic
-zle -N self-insert url-quote-magic
-
 # =のあともパス名保管する
 setopt magic_equal_subst
 
@@ -113,6 +109,16 @@ SPROMPT="correct: %R -> %r ? "
 
 # tmux
 [ -n "$TMUX" ] && export TERM=screen-256color
+
+# auto-fu.zsh
+if [ -f ~/dotfiles/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
+source ~/dotfiles/.zsh/auto-fu.zsh/auto-fu.zsh
+    function zle-line-init () {
+        auto-fu-init
+    }
+    zle -N zle-line-init
+    zstyle ':completion:*' completer _oldlist _complete
+fi
 
 export PATH=~/bin:$PATH
 
