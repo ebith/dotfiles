@@ -26,3 +26,5 @@
   quotepath = false
 [i18n]
   commitencoding = UTF-8
+[push]
+  default = simple
