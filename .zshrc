@@ -1,18 +1,17 @@
 # Created by newuser for 4.3.2
 fpath=($HOME/.zsh/functions $fpath)
 [[ -d /usr/local/share/zsh/site-functions ]] && fpath=(/usr/local/share/zsh/site-functions $fpath)
-autoload -U compinit; compinit
+autoload -Uz compinit; compinit
 
 # $colors[red]とか書けるようになる
-autoload -U colors; colors
+autoload -Uz colors; colors
 
 # 履歴関係
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-setopt rm_star_wait         # rm *すると確認
-setopt hist_ignore_dups     # ignore duplication command history list
+setopt hist_ignore_dups     # 履歴を重複させない
 setopt share_history        # share command history data
 setopt auto_cd              # cd無くてもcdする
 setopt auto_pushd           # popdすれば前のディレクトリに戻れるようになる
@@ -28,7 +27,7 @@ setopt magic_equal_subst
 setopt append_history
 
 # 賢く履歴を辿る
-autoload history-search-end
+autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
@@ -43,12 +42,17 @@ zstyle ':completion:*' list-colors 'di=01;34' 'ln=01;35' 'so=01;32' 'ex=01;31' '
 alias vi=vim
 alias screen="screen -xRU"
 
+alias -g C="| pbcopy"
+alias -g L="| less -R"
+alias -g T="| tail -f"
+
 case "${OSTYPE}" in
   cygwin*)
     alias open="cygstart"
 ;;
 esac
 
+# ls
 case "${OSTYPE}" in
   freebsd*|darwin*)
     alias ls="ls -G -aF"
@@ -58,10 +62,6 @@ case "${OSTYPE}" in
   ;;
 esac
 alias ll="ls -lh"
-
-alias L="| less -R"
-
-alias h="history -20"
 
 function psx { ps aux| head -1 && ps aux | grep -i $1 | sed -e '/grep/d' };
 
@@ -111,14 +111,14 @@ SPROMPT="correct: %R -> %r ? "
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 # auto-fu.zsh
-if [ -f ~/dotfiles/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
-source ~/dotfiles/.zsh/auto-fu.zsh/auto-fu.zsh
-    function zle-line-init () {
-        auto-fu-init
-    }
-    zle -N zle-line-init
-    zstyle ':completion:*' completer _oldlist _complete
-fi
+# if [ -f ~/dotfiles/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
+# source ~/dotfiles/.zsh/auto-fu.zsh/auto-fu.zsh
+#     function zle-line-init () {
+#         auto-fu-init
+#     }
+#     zle -N zle-line-init
+#     zstyle ':completion:*' completer _oldlist _complete
+# fi
 
 export PATH=~/bin:$PATH
 
