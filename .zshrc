@@ -1,20 +1,34 @@
-# Created by newuser for 4.3.2
+# 補完関係
 fpath=($HOME/.zsh/functions $fpath)
 [[ -d /usr/local/share/zsh/site-functions ]] && fpath=(/usr/local/share/zsh/site-functions $fpath)
-autoload -Uz compinit; compinit
+autoload -Uz compinit
+compinit
+
+# 補完で小文字でも大文字にマッチさせる
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# ../ の後は今いるディレクトリを補完しない
+zstyle ':completion:*' ignore-parents parent pwd ..
+
+# sudo の後ろでコマンド名を補完する
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+
+# ps コマンドのプロセス名補完
+zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+
 
 # $colors[red]とか書けるようになる
-autoload -Uz colors; colors
+autoload -Uz colors
+colors
 
 # 履歴関係
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 
 setopt hist_ignore_dups     # 履歴を重複させない
 setopt share_history        # share command history data
 setopt auto_cd              # cd無くてもcdする
-setopt auto_pushd           # popdすれば前のディレクトリに戻れるようになる
 setopt correct
 setopt list_packed
 setopt noautoremoveslash
@@ -25,6 +39,12 @@ setopt magic_equal_subst
 
 # historyを上書きではなく追記する
 setopt append_history
+
+# 単語の区切り文字を指定する (C-wでディレクトリ一つだけ削除できるように)
+autoload -Uz select-word-style
+select-word-style default
+zstyle ':zle:*' word-chars " /=;@:{},|"
+zstyle ':zle:*' word-style unspecified
 
 # 賢く履歴を辿る
 autoload -Uz history-search-end
@@ -104,21 +124,10 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 SPROMPT="correct: %R -> %r ? "
 
 # autojump
-[[ -s ~/.autojump/etc/profile.d/autojump.zsh ]] && source ~/.autojump/etc/profile.d/autojump.zsh # for OS X
 [[ -s /usr/share/autojump/autojump.sh ]] && source /usr/share/autojump/autojump.sh  # for Ubuntu
 
 # tmux
 [ -n "$TMUX" ] && export TERM=screen-256color
-
-# auto-fu.zsh
-# if [ -f ~/dotfiles/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
-# source ~/dotfiles/.zsh/auto-fu.zsh/auto-fu.zsh
-#     function zle-line-init () {
-#         auto-fu-init
-#     }
-#     zle -N zle-line-init
-#     zstyle ':completion:*' completer _oldlist _complete
-# fi
 
 export PATH=~/bin:$PATH
 
