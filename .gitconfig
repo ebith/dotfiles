@@ -8,6 +8,8 @@
 [pager]
   # diff =
 [alias]
+  add = add -v
+  amend = commit --amend -C HEAD
   br = branch
   ci = commit -v
   co = checkout
@@ -15,7 +17,6 @@
   sm = submodule
   st = status
   up = pull --rebase
-  amend = commit --amend -C HEAD
 [core]
   whitespace = cr-at-eol
   editor = vim
