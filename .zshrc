@@ -127,7 +127,14 @@ SPROMPT="correct: %R -> %r ? "
 [[ -s /usr/share/autojump/autojump.sh ]] && source /usr/share/autojump/autojump.sh  # for Ubuntu
 
 # tmux
-[ -n "$TMUX" ] && export TERM=screen-256color
+if [ -n "$TMUX" ]; then
+  export TERM=screen-256color
+  function ssh_tmux() {
+    tmux new-window -n $@ "exec ssh $@"
+  }
+  alias ssh=ssh_tmux
+fi
+
 
 export PATH=~/bin:$PATH
 
