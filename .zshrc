@@ -86,11 +86,9 @@ alias ll="ls -lh"
 function psx { ps aux| head -1 && ps aux | grep -i $1 | sed -e '/grep/d' };
 
 # Homebrew
-case "${OSTYPE}" in
-  darwin*)
-    export PATH=/usr/local/bin:$PATH
-  ;;
-esac
+if [ -x /usr/local/bin/brew ]; then
+  export PATH=/usr/local/bin:$PATH
+fi
 
 export LANG=ja_JP.UTF-8
 export SCREENDIR=~/.screen
@@ -123,8 +121,23 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 
 SPROMPT="correct: %R -> %r ? "
 
-# autojump
-[[ -s /usr/share/autojump/autojump.sh ]] && source /usr/share/autojump/autojump.sh  # for Ubuntu
+# C-rをpercolの使った奴にする
+function exists { which $1 &> /dev/null }
+if exists percol; then
+    function percol_select_history() {
+        local tac
+        exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
+        BUFFER=$(history -n 1 | eval $tac | percol --query "$LBUFFER")
+        CURSOR=$#BUFFER         # move cursor
+        zle -R -c               # refresh
+    }
+
+    zle -N percol_select_history
+    bindkey '^R' percol_select_history
+fi
+
+# knu-z
+[[ -s ~/external/z/z.sh ]] && source ~/external/z/z.sh
 
 # tmux
 if [ -n "$TMUX" ]; then
@@ -135,6 +148,22 @@ if [ -n "$TMUX" ]; then
   alias ssh=ssh_tmux
 fi
 
+# rbenv
+if [ -d ~/.rbenv/ ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+  function gem(){
+    $HOME/.rbenv/shims/gem $*
+    if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
+    then
+      rbenv rehash
+      rehash
+    fi
+  }
+fi
+
+# Nodebrew
+[[ -d ~/.nodebrew/ ]] && export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 export PATH=~/bin:$PATH
 
