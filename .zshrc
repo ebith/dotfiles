@@ -147,8 +147,11 @@ if [ -d ~/.rbenv/ ]; then
   }
 fi
 
-# Nodebrew
-[[ -d ~/.nodebrew/ ]] && export PATH=$HOME/.nodebrew/current/bin:$PATH
+# ndenv
+if [ -d ~/.ndenv/ ]; then
+  export PATH="$HOME/.ndenv/bin:$PATH"
+  eval "$(ndenv init -)"
+fi
 
 # Pure
 source ~/.zsh/pure/prompt.zsh
