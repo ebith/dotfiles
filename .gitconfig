@@ -9,7 +9,7 @@
   # diff =
 [alias]
   add = add -v
-  amend = commit --amend -C HEAD
+  amend = commit -a --amend --no-edit
   br = branch
   ci = commit -v
   co = checkout
