@@ -3,10 +3,6 @@
   email = ebith.h@gmail.com
 [color]
   ui = true
-[diff]
-  # external = ~/dotfiles/git_diff_wrapper
-[pager]
-  # diff =
 [alias]
   add = add -v
   amend = commit -a --amend --no-edit
