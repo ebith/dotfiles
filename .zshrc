@@ -103,22 +103,7 @@ case "${TERM}" in
   ;;
 esac
 
-# バージョン管理システムの情報を表示する
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' formats '[%b]'
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () {
-  psvar=()
-  LANG=en_US.UTF-8 vcs_info
-  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-}
-
-PROMPT="
-%{${fg[blue]}%}[%~]%{${reset_color}%}
-%n$ "
-RPROMPT="%1(v|%F{green}%1v%f|)"
-
+# もしかして:
 SPROMPT="correct: %R -> %r ? "
 
 # C-rをpercolの使った奴にする
@@ -164,6 +149,9 @@ fi
 
 # Nodebrew
 [[ -d ~/.nodebrew/ ]] && export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# Pure
+source ~/.zsh/pure/prompt.zsh
 
 export PATH=~/bin:$PATH
 
