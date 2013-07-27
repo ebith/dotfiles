@@ -13,6 +13,9 @@
   sm = submodule
   st = status
   up = pull --rebase
+  df = diff
+  dfc = diff --cached
+  cancel = !git commit -a -m 'Temporary commit for cancel' && git reset --hard HEAD~
 [core]
   whitespace = cr-at-eol
   editor = vim
