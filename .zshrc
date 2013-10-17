@@ -156,6 +156,12 @@ fi
 # Pure
 source ~/.zsh/pure/prompt.zsh
 
+# MacVim
+case ${OSTYPE} in
+  darwin*)
+    alias vim=/Applications/MacVim.app/Contents/MacOS/mvim
+esac
+
 export PATH=~/bin:$PATH
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
