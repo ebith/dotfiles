@@ -1,5 +1,6 @@
 # 補完関係
 fpath=($HOME/.zsh/functions $fpath)
+fpath=($HOME/.zsh/zsh-completions/src $fpath)
 [[ -d /usr/local/share/zsh/site-functions ]] && fpath=(/usr/local/share/zsh/site-functions $fpath)
 autoload -Uz compinit
 compinit
@@ -161,6 +162,9 @@ case ${OSTYPE} in
   darwin*)
     alias vim=/Applications/MacVim.app/Contents/MacOS/mvim
 esac
+
+# npm
+type npm > /dev/null 2>&1 && . <(npm completion)
 
 export PATH=~/bin:$PATH
 
