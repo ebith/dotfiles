@@ -2,3 +2,6 @@
 	path = .zsh/pure
   url = https://github.com/sindresorhus/pure.git
   ignore = dirty
+[submodule ".zsh/zsh-completions"]
+	path = .zsh/zsh-completions
+	url = git://github.com/zsh-users/zsh-completions.git
