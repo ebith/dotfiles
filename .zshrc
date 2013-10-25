@@ -67,12 +67,6 @@ alias -g C="| pbcopy"
 alias -g L="| less -R"
 alias -g T="| tail -f"
 
-case "${OSTYPE}" in
-  cygwin*)
-    alias open="cygstart"
-;;
-esac
-
 # ls
 case "${OSTYPE}" in
   freebsd*|darwin*)
