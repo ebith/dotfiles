@@ -1,7 +1,6 @@
 # 補完関係
-fpath=($HOME/.zsh/functions $fpath)
-fpath=($HOME/.zsh/zsh-completions/src $fpath)
 [[ -d /usr/local/share/zsh/site-functions ]] && fpath=(/usr/local/share/zsh/site-functions $fpath)
+fpath=($HOME/.zsh/zsh-completions/src $fpath)
 autoload -Uz compinit
 compinit
 
@@ -16,7 +15,6 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/s
 
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
-
 
 # $colors[red]とか書けるようになる
 autoload -Uz colors
@@ -54,52 +52,45 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
-# color
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS='di=01;34:ln=01;35:so=01;32:pi=01;33:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-zstyle ':completion:*' list-colors 'di=01;34' 'ln=01;35' 'so=01;32' 'ex=01;31' 'bd=46;34' 'cd=43;34'
-
 # alias
 alias vi=vim
-alias screen="screen -xRU"
 
 alias -g C="| pbcopy"
 alias -g L="| less -R"
 alias -g T="| tail -f"
 
-# ls
-case "${OSTYPE}" in
-  freebsd*|darwin*)
-    alias ls="ls -G -aF"
-  ;;
-  cygwin|linux*)
-    alias ls="ls --color -aF"
-  ;;
-esac
+## ls
+alias ls='ls --color=auto -aF'
 alias ll="ls -lh"
 
-function psx { ps aux| head -1 && ps aux | grep -i $1 | sed -e '/grep/d' };
+alias pgrep="pgrep -fl"
+
+export LANG=ja_JP.UTF-8
+export TERM=xterm-256color
+
+# もしかして:
+SPROMPT="correct: %R -> %r ? "
+
+export PATH=~/bin:$PATH
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # Homebrew
 if [ -x /usr/local/bin/brew ]; then
   export PATH=/usr/local/bin:$PATH
 fi
 
-export LANG=ja_JP.UTF-8
-export SCREENDIR=~/.screen
-export TERM=xterm-256color
-
-# ターミナルのタイトルを設定する
-case "${TERM}" in
-  kterm*|xterm*)
-    precmd() {
-      echo -ne "\033]0;${HOST%%.*}:${PWD}\007"
-    }
-  ;;
+# Macでもgnu coreutils使う
+case ${OSTYPE} in
+  darwin*)
+    if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
+      export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+      export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+    fi
 esac
 
-# もしかして:
-SPROMPT="correct: %R -> %r ? "
+# dircolors
+eval `dircolors ~/.zsh/dircolors-solarized/dircolors.256dark`
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # C-rをpercolの使った奴にする
 function exists { which $1 &> /dev/null }
@@ -116,8 +107,9 @@ if exists percol; then
     bindkey '^R' percol_select_history
 fi
 
-# knu-z
-[[ -s ~/external/z/z.sh ]] && source ~/external/z/z.sh
+# knu/z - https://github.com/knu/z
+autoload -Uz is-at-least
+[[ -s ~/.zsh/z/z.sh ]] && source ~/.zsh/z/z.sh
 
 # tmux
 if [ -n "$TMUX" ]; then
@@ -128,10 +120,15 @@ if [ -n "$TMUX" ]; then
   alias ssh=ssh_tmux
 fi
 
-# rbenv
+# npm
+type npm > /dev/null 2>&1 && . <(npm completion)
+
+# なんとかenv系
+## rbenv
 if [ -d ~/.rbenv/ ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
+  . ~/.rbenv/completions/rbenv.zsh
   function gem(){
     $HOME/.rbenv/shims/gem $*
     if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
@@ -142,24 +139,18 @@ if [ -d ~/.rbenv/ ]; then
   }
 fi
 
-# ndenv
+## ndenv
 if [ -d ~/.ndenv/ ]; then
   export PATH="$HOME/.ndenv/bin:$PATH"
   eval "$(ndenv init -)"
+  . ~/.ndenv/completions/ndenv.zsh
 fi
 
-# Pure
+# sindresorhus/pure (Pretty, minimal and fast ZSH prompt) - https://github.com/sindresorhus/pure
 source ~/.zsh/pure/prompt.zsh
 
-# MacVim
+# MacVim KaoriYa - http://code.google.com/p/macvim-kaoriya/
 case ${OSTYPE} in
   darwin*)
-    alias vim=/Applications/MacVim.app/Contents/MacOS/mvim
+    alias vim="/Applications/MacVim.app/Contents/MacOS/mvim --remote-tab-silent"
 esac
-
-# npm
-type npm > /dev/null 2>&1 && . <(npm completion)
-
-export PATH=~/bin:$PATH
-
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
