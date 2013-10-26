@@ -27,6 +27,7 @@
   autocrlf = false
   safecrlf = false
   quotepath = false
+  precomposeunicode = true
 [i18n]
   commitencoding = UTF-8
 [push]
