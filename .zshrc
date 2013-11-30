@@ -144,6 +144,14 @@ if [ -d ~/.ndenv/ ]; then
   export PATH="$HOME/.ndenv/bin:$PATH"
   eval "$(ndenv init -)"
   . ~/.ndenv/completions/ndenv.zsh
+  function npm() {
+    $HOME/.ndenv/shims/npm $*
+    if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
+    then
+      ndenv rehash
+      rehash
+    fi
+  }
 fi
 
 # sindresorhus/pure (Pretty, minimal and fast ZSH prompt) - https://github.com/sindresorhus/pure
