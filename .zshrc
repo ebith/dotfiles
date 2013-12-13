@@ -154,6 +154,11 @@ if [ -d ~/.ndenv/ ]; then
   }
 fi
 
+## perlbrew
+if [ -f $HOME/perl5/perlbrew/etc/bashrc ]; then
+ source $HOME/perl5/perlbrew/etc/bashrc
+fi
+
 # sindresorhus/pure (Pretty, minimal and fast ZSH prompt) - https://github.com/sindresorhus/pure
 source ~/.zsh/pure/prompt.zsh
 
