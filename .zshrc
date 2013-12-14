@@ -154,9 +154,19 @@ if [ -d ~/.ndenv/ ]; then
   }
 fi
 
-## perlbrew
-if [ -f $HOME/perl5/perlbrew/etc/bashrc ]; then
- source $HOME/perl5/perlbrew/etc/bashrc
+## plenv
+if [ -d ~/.plenv/ ]; then
+  export PATH="$HOME/.plenv/bin:$PATH"
+  eval "$(plenv init -)"
+  . ~/.plenv/completions/plenv.zsh
+  function cpanm() {
+    $HOME/.plenv/shims/cpanm $*
+    if [ true ]
+    then
+      plenv rehash
+      rehash
+    fi
+  }
 fi
 
 # sindresorhus/pure (Pretty, minimal and fast ZSH prompt) - https://github.com/sindresorhus/pure
