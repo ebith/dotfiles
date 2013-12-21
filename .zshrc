@@ -170,7 +170,9 @@ if [ -d ~/.plenv/ ]; then
 fi
 
 # sindresorhus/pure (Pretty, minimal and fast ZSH prompt) - https://github.com/sindresorhus/pure
-source ~/.zsh/pure/prompt.zsh
+# ln -s ~/dotfiles/.zsh/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
+autoload -U promptinit && promptinit
+prompt pure
 
 # MacVim KaoriYa - http://code.google.com/p/macvim-kaoriya/
 case ${OSTYPE} in
