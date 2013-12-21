@@ -1,8 +1,7 @@
 # 補完関係
 [[ -d /usr/local/share/zsh/site-functions ]] && fpath=(/usr/local/share/zsh/site-functions $fpath)
 fpath=($HOME/.zsh/zsh-completions/src $fpath)
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
 
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -17,8 +16,7 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/s
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
 # $colors[red]とか書けるようになる
-autoload -Uz colors
-colors
+autoload -Uz colors && colors
 
 # 履歴関係
 HISTFILE=~/.zsh_history
@@ -121,14 +119,14 @@ if [ -n "$TMUX" ]; then
 fi
 
 # npm
-type npm > /dev/null 2>&1 && . <(npm completion)
+type npm > /dev/null 2>&1 && source <(npm completion)
 
 # なんとかenv系
 ## rbenv
 if [ -d ~/.rbenv/ ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
-  . ~/.rbenv/completions/rbenv.zsh
+  source ~/.rbenv/completions/rbenv.zsh
   function gem(){
     $HOME/.rbenv/shims/gem $*
     if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
@@ -143,7 +141,7 @@ fi
 if [ -d ~/.ndenv/ ]; then
   export PATH="$HOME/.ndenv/bin:$PATH"
   eval "$(ndenv init -)"
-  . ~/.ndenv/completions/ndenv.zsh
+  source ~/.ndenv/completions/ndenv.zsh
   function npm() {
     $HOME/.ndenv/shims/npm $*
     if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
@@ -158,7 +156,7 @@ fi
 if [ -d ~/.plenv/ ]; then
   export PATH="$HOME/.plenv/bin:$PATH"
   eval "$(plenv init -)"
-  . ~/.plenv/completions/plenv.zsh
+  source ~/.plenv/completions/plenv.zsh
   function cpanm() {
     $HOME/.plenv/shims/cpanm $*
     if [ true ]
@@ -174,7 +172,7 @@ fi
 autoload -U promptinit && promptinit
 prompt pure
 
-# MacVim KaoriYa - http://code.google.com/p/macvim-kaoriya/
+# MacVim KaoriYa - http://codesource.google.com/p/macvim-kaoriya/
 case ${OSTYPE} in
   darwin*)
     alias vim="/Applications/MacVim.app/Contents/MacOS/mvim --remote-tab-silent"
