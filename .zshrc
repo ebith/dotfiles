@@ -177,3 +177,6 @@ case ${OSTYPE} in
   darwin*)
     alias vim="/Applications/MacVim.app/Contents/MacOS/mvim --remote-tab-silent"
 esac
+
+# marzocchi/zsh-notify - https://github.com/marzocchi/zsh-notify
+source ~/.zsh/zsh-notify/notify.plugin.zsh

@@ -11,3 +11,6 @@
 [submodule ".zsh/dircolors-solarized"]
 	path = .zsh/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
+[submodule ".zsh/zsh-notify"]
+	path = .zsh/zsh-notify
+	url = https://github.com/marzocchi/zsh-notify.git
