@@ -19,17 +19,20 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 autoload -Uz colors && colors
 
 # 履歴関係
+setopt hist_ignore_all_dups
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
-setopt hist_ignore_dups     # 履歴を重複させない
-setopt share_history        # share command history data
-setopt auto_cd              # cd無くてもcdする
+setopt share_history
 setopt correct
 setopt list_packed
 setopt noautoremoveslash
 setopt complete_aliases
+
+setopt auto_cd
+alias ..='cd ../'
+alias ...='cd ../../'
 
 # =のあともパス名保管する
 setopt magic_equal_subst
