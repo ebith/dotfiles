@@ -33,7 +33,7 @@
 [push]
   default = simple
 [browse-remote "github.com"]
-	top = https://{host}/{path}
-	ref = https://{host}/{path}/tree/{short_ref}
-	rev = https://{host}/{path}/commit/{commit}
-	file = "https://{host}/{path}/{file.directory? and :tree or :blob}/{short_rev}/{file}{line && \"#L%d\" % line}"
+  top = https://{host}/{path}
+  ref = https://{host}/{path}/tree/{short_ref}
+  rev = https://{host}/{path}/commit/{commit}
+  file = "https://{host}/{path}/{file.directory? and :tree or :blob}/{short_rev}/{file}{line && \"#L%d\" % line}"
