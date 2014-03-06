@@ -83,9 +83,9 @@ fi
 # Macでもgnu coreutils使う
 case ${OSTYPE} in
   darwin*)
-    if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
-      export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-      export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+    if [ -d $(brew --prefix coreutils)/libexec/gnubin ]; then
+      export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+      export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
     fi
 esac
 
