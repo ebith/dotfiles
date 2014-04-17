@@ -1,3 +1,6 @@
+# 重複させない
+typeset -U PATH
+
 # 補完関係
 [[ -d /usr/local/share/zsh/site-functions ]] && fpath=(/usr/local/share/zsh/site-functions $fpath)
 fpath=($HOME/.zsh/zsh-completions/src $fpath)
@@ -73,11 +76,14 @@ export TERM=xterm-256color
 SPROMPT="correct: %R -> %r ? "
 
 export PATH=~/bin:$PATH
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # Homebrew
 if [ -x /usr/local/bin/brew ]; then
   export PATH=/usr/local/bin:$PATH
+  if [ -d /usr/local/sbin ]; then
+    export PATH=/usr/local/sbin:$PATH
+  fi
 fi
 
 # Macでもgnu coreutils使う
