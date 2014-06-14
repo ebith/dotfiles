@@ -37,3 +37,5 @@
   ref = https://{host}/{path}/tree/{short_ref}
   rev = https://{host}/{path}/commit/{commit}
   file = "https://{host}/{path}/{file.directory? and :tree or :blob}/{short_rev}/{file}{line && \"#L%d\" % line}"
+[rebase]
+  autostash=true
