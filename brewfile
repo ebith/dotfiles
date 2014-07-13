@@ -1,10 +1,13 @@
-tap homebrew/dupes
-tap phinze/homebrew-cask
-tap homebrew/versions
-tap caskroom/versions
 update
+upgrade
 
+tap caskroom/cask
 install brew-cask
+tap caskroom/versions
+
+tap homebrew/dupes
+tap homebrew/versions
+
 install cmigemo
 install coreutils
 install curl-ca-bundle
@@ -14,7 +17,7 @@ install htop-osx
 install jq
 install massren
 install mongodb
-install python3
+install pwgen
 install readline
 install sshfs
 install the-silver-searcher
@@ -23,16 +26,18 @@ install tmux
 install tree
 install wget
 install zsh --disable-etcdir
+install zsh-completions
 
 cask install alfred
 cask install appcleaner
 cask install dropbox
-cask install flash
 cask install firefox
+cask install flash
 cask install google-chrome
 cask install google-japanese-ime
 cask install iterm2
 cask install keyremap4macbook
+cask install libreoffice
 cask install macvim-kaoriya
 cask install robomongo
 cask install smoothmouse
@@ -43,3 +48,4 @@ cask install vagrant
 cask install virtualbox
 
 cask alfred link
+linkapps
