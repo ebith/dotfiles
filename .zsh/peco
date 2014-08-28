@@ -1,0 +1,39 @@
+# Use peco (https://github.com/peco/peco) to search ZSH's history via ctrl+R - https://gist.github.com/jimeh/7d94f1000cfc9cba2893
+if which peco &> /dev/null; then
+  function peco_select_history() {
+    BUFFER=$(fc -l -n 1 | eval tac | peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle -R -c
+  }
+  zle -N peco_select_history
+  bindkey '^R' peco_select_history
+fi
+
+# 私のpeco活用事例 - k0kubun's blog - http://k0kubun.hatenablog.com/entry/2014/07/06/033336
+function peco-pkill() {
+  for pid in `ps aux | peco | awk '{ print $2 }'`
+    do
+      kill $pid
+        echo "Killed ${pid}"
+        done
+}
+alias pk="peco-pkill"
+
+# https://github.com/shibayu36/config-file/blob/master/.zsh/percol-sources/cdr.zsh
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-max 5000
+zstyle ':chpwd:*' recent-dirs-default yes
+zstyle ':completion:*' recent-dirs-insert both
+function percol-cdr () {
+    local selected_dir=$(cdr -l | awk '{ print $2 }' | percol)
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N percol-cdr
+bindkey '^@' percol-cdr
+
+# vim: ft=zsh

@@ -28,6 +28,9 @@ install wget
 install zsh --disable-etcdir
 install zsh-completions
 
+tap peco/peco
+install peco
+
 cask install alfred
 cask install appcleaner
 cask install dropbox

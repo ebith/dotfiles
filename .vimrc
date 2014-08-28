@@ -60,8 +60,8 @@ set ttymouse=xterm2
 " ========================================
 let mapleader = ","
 
-noremap H :tabprevious<CR>
-noremap L :tabnext<CR>
+noremap <C-h> :tabprevious<CR>
+noremap <C-l> :tabnext<CR>
 
 "xで削除した文字はレジスタに入れない
 nnoremap x "_x

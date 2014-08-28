@@ -69,6 +69,8 @@ alias ll="ls -lh"
 
 alias pgrep="pgrep -fl"
 
+alias rm="rm -i"
+
 export LANG=ja_JP.UTF-8
 export TERM=xterm-256color
 
@@ -99,25 +101,6 @@ esac
 eval `dircolors ~/.zsh/dircolors-solarized/dircolors.256dark`
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-# C-rをpercolの使った奴にする
-function exists { which $1 &> /dev/null }
-if exists percol; then
-    function percol_select_history() {
-        local tac
-        exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
-        BUFFER=$(history -n 1 | eval $tac | percol --query "$LBUFFER")
-        CURSOR=$#BUFFER         # move cursor
-        zle -R -c               # refresh
-    }
-
-    zle -N percol_select_history
-    bindkey '^R' percol_select_history
-fi
-
-# knu/z - https://github.com/knu/z
-autoload -Uz is-at-least
-[[ -s ~/.zsh/z/z.sh ]] && source ~/.zsh/z/z.sh
-
 # tmux
 if [ -n "$TMUX" ]; then
   export TERM=screen-256color
@@ -129,52 +112,6 @@ fi
 
 # npm
 type npm > /dev/null 2>&1 && source <(npm completion)
-
-# なんとかenv系
-## rbenv
-if [ -d ~/.rbenv/ ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-  source ~/.rbenv/completions/rbenv.zsh
-  function gem(){
-    $HOME/.rbenv/shims/gem $*
-    if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
-    then
-      rbenv rehash
-      rehash
-    fi
-  }
-fi
-
-## ndenv
-if [ -d ~/.ndenv/ ]; then
-  export PATH="$HOME/.ndenv/bin:$PATH"
-  eval "$(ndenv init -)"
-  source ~/.ndenv/completions/ndenv.zsh
-  function npm() {
-    $HOME/.ndenv/shims/npm $*
-    if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
-    then
-      ndenv rehash
-      rehash
-    fi
-  }
-fi
-
-## plenv
-if [ -d ~/.plenv/ ]; then
-  export PATH="$HOME/.plenv/bin:$PATH"
-  eval "$(plenv init -)"
-  source ~/.plenv/completions/plenv.zsh
-  function cpanm() {
-    $HOME/.plenv/shims/cpanm $*
-    if [ true ]
-    then
-      plenv rehash
-      rehash
-    fi
-  }
-fi
 
 # sindresorhus/pure (Pretty, minimal and fast ZSH prompt) - https://github.com/sindresorhus/pure
 # ln -s ~/dotfiles/.zsh/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
@@ -188,4 +125,16 @@ case ${OSTYPE} in
 esac
 
 # marzocchi/zsh-notify - https://github.com/marzocchi/zsh-notify
-source ~/.zsh/zsh-notify/notify.plugin.zsh
+case ${OSTYPE} in
+  darwin*)
+    source ~/.zsh/zsh-notify/notify.plugin.zsh
+esac
+
+# ssh port fowarding
+function sshpf() {
+  \ssh -fL $1\:localhost\:$1 sakura -N
+}
+
+# 外出しした設定ファイル
+source ~/.zsh/env
+source ~/.zsh/peco
