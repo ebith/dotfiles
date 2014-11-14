@@ -69,8 +69,6 @@ alias ll="ls -lh"
 
 alias pgrep="pgrep -fl"
 
-alias rm="rm -i"
-
 export LANG=ja_JP.UTF-8
 export TERM=xterm-256color
 
