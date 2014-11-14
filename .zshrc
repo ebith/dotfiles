@@ -140,6 +140,10 @@ export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
+# knu/z - https://github.com/knu/z
+autoload -Uz is-at-least
+[[ -s ~/.zsh/z/z.sh ]] && source ~/.zsh/z/z.sh
+
 # 外出しした設定ファイル
 source ~/.zsh/env
 source ~/.zsh/peco

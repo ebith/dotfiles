@@ -19,21 +19,4 @@ function peco-pkill() {
 }
 alias pk="peco-pkill"
 
-# https://github.com/shibayu36/config-file/blob/master/.zsh/percol-sources/cdr.zsh
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
-zstyle ':chpwd:*' recent-dirs-max 5000
-zstyle ':chpwd:*' recent-dirs-default yes
-zstyle ':completion:*' recent-dirs-insert both
-function percol-cdr () {
-    local selected_dir=$(cdr -l | awk '{ print $2 }' | percol)
-    if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
-        zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N percol-cdr
-bindkey '^@' percol-cdr
-
 # vim: ft=zsh
