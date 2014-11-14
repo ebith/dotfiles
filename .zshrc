@@ -135,6 +135,11 @@ function sshpf() {
   \ssh -fL $1\:localhost\:$1 sakura -N
 }
 
+# golang
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
 # 外出しした設定ファイル
 source ~/.zsh/env
 source ~/.zsh/peco
