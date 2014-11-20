@@ -8,17 +8,13 @@ tap caskroom/versions
 tap homebrew/dupes
 tap homebrew/versions
 
-install cmigemo
 install coreutils
 install curl-ca-bundle
 install git
-install git-now
 install htop-osx
 install jq
 install massren
-install mongodb
 install pwgen
-install readline
 install sshfs
 install the-silver-searcher
 install tig
@@ -46,6 +42,7 @@ cask install robomongo
 cask install smoothmouse
 cask install sourcetree
 cask install steam
+cask install teamspeak-client
 cask install the-unarchiver
 cask install vagrant
 cask install virtualbox
