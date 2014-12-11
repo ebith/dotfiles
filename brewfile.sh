@@ -48,9 +48,9 @@ brew cask install sourcetree
 brew cask install steam
 brew cask install teamspeak-client
 brew cask install the-unarchiver
+brew cask install transmission
 brew cask install vagrant
 brew cask install virtualbox
-brew cask install transmission
 
 brew cleanup
 brew cask cleanup
