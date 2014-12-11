@@ -39,3 +39,8 @@
   file = "https://{host}/{path}/{file.directory? and :tree or :blob}/{short_rev}/{file}{line && \"#L%d\" % line}"
 [rebase]
   autostash=true
+[url "git@github.com:"]
+  pushinsteadof = https://github.com/
+[ghq]
+  root = ~/.ghq
+  root = ~/.go/src

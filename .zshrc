@@ -119,7 +119,7 @@ prompt pure
 # MacVim KaoriYa - http://codesource.google.com/p/macvim-kaoriya/
 case ${OSTYPE} in
   darwin*)
-    alias vim="/Applications/MacVim.app/Contents/MacOS/mvim --remote-tab-silent"
+    alias vim="~/Applications/MacVim.app/Contents/MacOS/mvim --remote-tab-silent"
 esac
 
 # marzocchi/zsh-notify - https://github.com/marzocchi/zsh-notify
@@ -134,7 +134,7 @@ function sshpf() {
 }
 
 # golang
-export GOPATH=$HOME/go
+export GOPATH=$HOME/.go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
@@ -142,6 +142,12 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 autoload -Uz is-at-least
 [[ -s ~/.zsh/z/z.sh ]] && source ~/.zsh/z/z.sh
 
+# riywo/anyenv - https://github.com/riywo/anyenv
+if [ -d ~/.anyenv/ ]; then
+  export PATH="$HOME/.anyenv/bin:$PATH"
+  eval "$(anyenv init -)"
+  source ~/.anyenv/completions/anyenv.zsh
+fi
+
 # 外出しした設定ファイル
-source ~/.zsh/env
 source ~/.zsh/peco

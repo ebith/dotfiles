@@ -1,13 +1,11 @@
 # Use peco (https://github.com/peco/peco) to search ZSH's history via ctrl+R - https://gist.github.com/jimeh/7d94f1000cfc9cba2893
-if which peco &> /dev/null; then
-  function peco_select_history() {
-    BUFFER=$(fc -l -n 1 | eval tac | peco --query "$LBUFFER")
-    CURSOR=$#BUFFER
-    zle -R -c
-  }
-  zle -N peco_select_history
-  bindkey '^R' peco_select_history
-fi
+function peco_select_history() {
+  BUFFER=$(fc -l -n 1 | eval tac | peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle -R -c
+}
+zle -N peco_select_history
+bindkey '^R' peco_select_history
 
 # 私のpeco活用事例 - k0kubun's blog - http://k0kubun.hatenablog.com/entry/2014/07/06/033336
 function peco-pkill() {
@@ -17,6 +15,9 @@ function peco-pkill() {
         echo "Killed ${pid}"
         done
 }
-alias pk="peco-pkill"
+alias pkill="peco-pkill"
 
+function pghq() {
+  cd $(ghq list -p | peco)
+}
 # vim: ft=zsh
