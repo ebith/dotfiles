@@ -37,6 +37,9 @@ setopt auto_cd
 alias ..='cd ../'
 alias ...='cd ../../'
 
+setopt extended_glob
+setopt nullglob
+
 # =のあともパス名保管する
 setopt magic_equal_subst
 
@@ -148,6 +151,10 @@ if [ -d ~/.anyenv/ ]; then
   eval "$(anyenv init -)"
   source ~/.anyenv/completions/anyenv.zsh
 fi
+
+# Node.js
+export PATH=./node_modules/.bin:$PATH
+alias gulp="nocorrect gulp"
 
 # 外出しした設定ファイル
 source ~/.zsh/peco
