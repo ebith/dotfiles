@@ -162,5 +162,13 @@ chpwd() {
   _cdd_chpwd
 }
 
+# Eject All
+case ${OSTYPE} in
+  darwin*)
+    function ejectAll() {
+      osascript -e "tell application \"Finder\" to eject (every disk whose ejectable is true and local volume is true and free space is not equal to 0)"
+    }
+esac
+
 # 外出しした設定ファイル
 source ~/.zsh/peco
