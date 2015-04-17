@@ -156,5 +156,11 @@ fi
 export PATH=./node_modules/.bin:$PATH
 alias gulp="nocorrect gulp"
 
+# cdd を tmux, bash, multi session +α に対応した - @m4i's blog - http://blog.m4i.jp/entry/2012/01/26/064329
+source ~/.zsh/cdd/cdd
+chpwd() {
+  _cdd_chpwd
+}
+
 # 外出しした設定ファイル
 source ~/.zsh/peco
