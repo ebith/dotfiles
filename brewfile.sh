@@ -13,8 +13,9 @@ brew tap homebrew/versions
 brew install ag
 brew install coreutils
 brew install git
-brew install htop-osx
+brew install httpie
 brew install jq
+brew install phantomjs
 brew install pwgen
 brew install reattach-to-user-namespace
 brew install ssh-copy-id
@@ -30,6 +31,7 @@ brew install zsh-completions
 brew install laurent22/massren/massren
 brew install motemen/ghq/ghq
 brew install peco/peco/peco
+brew install migemogrep
 
 brew cask install appcleaner
 brew cask install dropbox
@@ -51,6 +53,8 @@ brew cask install the-unarchiver
 brew cask install transmission
 brew cask install vagrant
 brew cask install virtualbox
+brew cask install gyazo
+brew cask install bittorrent-sync
 
 brew cleanup
 brew cask cleanup

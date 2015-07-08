@@ -2,5 +2,11 @@
   "Style": {
     "Selected": ["black", "on_red"],
     "Matched": ["yellow"]
+  },
+  "CustomMatcher": {
+    "Migemo": [
+      "migemogrep",
+      "$QUERY"
+    ]
   }
 }
