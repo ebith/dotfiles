@@ -3,7 +3,7 @@ typeset -U PATH
 
 # 補完関係
 [[ -d /usr/local/share/zsh/site-functions ]] && fpath=(/usr/local/share/zsh/site-functions $fpath)
-fpath=($HOME/.zsh/zsh-completions/src $fpath)
+fpath=($HOME/.zsh/.zfunctions $HOME/.zsh/zsh-completions/src $fpath)
 autoload -Uz compinit && compinit
 
 # 補完で小文字でも大文字にマッチさせる
@@ -115,7 +115,6 @@ fi
 type npm > /dev/null 2>&1 && source <(npm completion)
 
 # sindresorhus/pure (Pretty, minimal and fast ZSH prompt) - https://github.com/sindresorhus/pure
-# ln -s ~/dotfiles/.zsh/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
 autoload -U promptinit && promptinit
 prompt pure
 
