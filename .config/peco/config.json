@@ -3,10 +3,10 @@
     "Selected": ["black", "on_red"],
     "Matched": ["yellow"]
   },
-  "CustomMatcher": {
-    "Migemo": [
-      "migemogrep",
-      "$QUERY"
-    ]
+  "CustomFilter": {
+    "Migemo": {
+      "Cmd": "migemogrep",
+      "BufferThreshold": 10000
+    }
   }
 }

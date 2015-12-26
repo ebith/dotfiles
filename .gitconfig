@@ -19,6 +19,7 @@
   ignore = update-index --assume-unchanged
   unignore = update-index --no-assume-unchanged
   ignored = !git ls-files -v | grep "^[a-z]"
+  smup = "submodule foreach 'git fetch;git checkout origin/master'"
 [core]
   whitespace = cr-at-eol
   editor = vim

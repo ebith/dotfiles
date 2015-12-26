@@ -168,6 +168,7 @@ case ${OSTYPE} in
     function ejectAll() {
       osascript -e "tell application \"Finder\" to eject (every disk whose ejectable is true and local volume is true and free space is not equal to 0)"
     }
+    alias unmountAll=ejectAll
 esac
 
 # 外出しした設定ファイル
