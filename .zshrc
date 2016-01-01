@@ -78,26 +78,6 @@ export TERM=xterm-256color
 # もしかして:
 SPROMPT="correct: %R -> %r ? "
 
-export PATH=~/bin:$PATH
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-
-# Homebrew
-if [ -x /usr/local/bin/brew ]; then
-  export PATH=/usr/local/bin:$PATH
-  if [ -d /usr/local/sbin ]; then
-    export PATH=/usr/local/sbin:$PATH
-  fi
-fi
-
-# Macでもgnu coreutils使う
-case ${OSTYPE} in
-  darwin*)
-    if [ -d $(brew --prefix coreutils)/libexec/gnubin ]; then
-      export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-      export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
-    fi
-esac
-
 # dircolors
 eval `dircolors ~/.zsh/dircolors-solarized/dircolors.256dark`
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
@@ -135,25 +115,9 @@ function sshpf() {
   \ssh -fL $1\:localhost\:$1 sakura -N
 }
 
-# golang
-export GOPATH=$HOME/.go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
 # knu/z - https://github.com/knu/z
 autoload -Uz is-at-least
-[[ -s ~/.zsh/z/z.sh ]] && source ~/.zsh/z/z.sh
-
-# riywo/anyenv - https://github.com/riywo/anyenv
-if [ -d ~/.anyenv/ ]; then
-  export PATH="$HOME/.anyenv/bin:$PATH"
-  eval "$(anyenv init -)"
-  source ~/.anyenv/completions/anyenv.zsh
-fi
-
-# Node.js
-export PATH=./node_modules/.bin:$PATH
-alias gulp="nocorrect gulp"
+source ~/.zsh/z/z.sh
 
 # cdd を tmux, bash, multi session +α に対応した - @m4i's blog - http://blog.m4i.jp/entry/2012/01/26/064329
 source ~/.zsh/cdd/cdd
@@ -172,3 +136,4 @@ esac
 
 # 外出しした設定ファイル
 source ~/.zsh/peco
+
