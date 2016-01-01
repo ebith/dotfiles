@@ -135,5 +135,5 @@ case ${OSTYPE} in
 esac
 
 # 外出しした設定ファイル
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 source ~/.zsh/peco
-
