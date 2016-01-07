@@ -4,6 +4,9 @@
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
+# Dockを左に
+defaults write com.apple.dock orientation -string 'left'
+
 # Dockを自動的に隠す
 defaults write com.apple.dock autohide -bool true
 

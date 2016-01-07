@@ -25,8 +25,6 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 # riywo/anyenv - https://github.com/riywo/anyenv
 if [ -d ~/.anyenv/ ]; then
   export PATH="$HOME/.anyenv/bin:$PATH"
-  eval "$(anyenv init -)"
-  source ~/.anyenv/completions/anyenv.zsh
 fi
 
 # Node.js

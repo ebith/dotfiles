@@ -28,6 +28,7 @@ brew install wget
 brew install zsh --disable-etcdir
 brew install zsh-completions
 brew install ttyrec
+brew install direnv
 
 brew install laurent22/massren/massren
 brew install motemen/ghq/ghq

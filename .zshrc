@@ -134,6 +134,14 @@ case ${OSTYPE} in
     alias unmountAll=ejectAll
 esac
 
+# riywo/anyenv - https://github.com/riywo/anyenv
+if [ -d ~/.anyenv/ ]; then
+  eval "$(anyenv init -)"
+fi
+
+# direnv - unclutter your .profile - http://direnv.net/
+eval "$(direnv hook zsh)"
+
 # 外出しした設定ファイル
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 source ~/.zsh/peco
