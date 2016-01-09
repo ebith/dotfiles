@@ -142,6 +142,13 @@ fi
 # direnv - unclutter your .profile - http://direnv.net/
 eval "$(direnv hook zsh)"
 
+# tmuxのウィンドウ名をカレントディレクトリにする - ミントフレーバー緑茶 - http://mint.hateblo.jp/entry/2012/12/17/175553
+show-current-dir-as-window-name() {
+    tmux set-window-option window-status-format "#I:${PWD:t}" > /dev/null
+}
+show-current-dir-as-window-name
+add-zsh-hook chpwd show-current-dir-as-window-name
+
 # 外出しした設定ファイル
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 source ~/.zsh/peco
