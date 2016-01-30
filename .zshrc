@@ -1,4 +1,53 @@
-# 重複させない
+########################################
+# zplug
+########################################
+source ~/.zplug/zplug
+zplug "b4b4r07/zplug"
+
+zplug "zsh-users/zsh-completions"
+# backward-kill-wordが死ぬ。Zsh 5.3で直るらしい
+# zplug "zsh-users/zsh-syntax-highlighting"
+# zsh-syntax-highlighting が無いとエラー吐く
+# zplug "zsh-users/zsh-history-substring-search"
+
+zplug "rimraf/k"
+
+zplug "mafredri/zsh-async" | zplug "sindresorhus/pure"
+
+zplug "b4b4r07/enhancd", of:enhancd.sh
+# zplug "knu/z", of:z.sh
+
+zplug "mollifier/anyframe"
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+zplug load --verbose
+
+########################################
+# plugin setting
+########################################
+
+# mollifier/anyframe: peco/percol/fzf wrapper plugin for zsh - https://github.com/mollifier/anyframe
+bindkey '^r' anyframe-widget-execute-history
+bindkey '^xi' anyframe-widget-put-history
+bindkey '^x^i' anyframe-widget-put-history
+# alias gcd=anyframe-widget-cd-ghq-repository
+# bindkey '^xg' anyframe-widget-cd-ghq-repository
+# bindkey '^x^g' anyframe-widget-cd-ghq-repository
+alias pkill=anyframe-widget-kill
+bindkey '^xk' anyframe-widget-kill
+bindkey '^x^k' anyframe-widget-kill
+
+# zsh-users/zsh-history-substring-search: ZSH port of Fish shell's history search feature. - https://github.com/zsh-users/zsh-history-substring-search
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
+#################### 未整理 ####################
+# $PATHを重複させない
 typeset -U PATH
 
 # 補完関係
@@ -21,21 +70,31 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 # $colors[red]とか書けるようになる
 autoload -Uz colors && colors
 
+# C-dでログアウトしない
+setopt ignore_eof
+
 # 履歴関係
+setopt share_history
+setopt hist_reduce_blanks
 setopt hist_ignore_all_dups
+setopt hist_ignore_space
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
-setopt share_history
+# 賢く履歴を辿る
+autoload -Uz history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+
 setopt correct
 setopt list_packed
 setopt noautoremoveslash
 setopt complete_aliases
 
 setopt auto_cd
-alias ..='cd ../'
-alias ...='cd ../../'
 
 setopt extended_glob
 setopt nullglob
@@ -52,21 +111,12 @@ select-word-style default
 zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
 
-# 賢く履歴を辿る
-autoload -Uz history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
-
 # alias
 alias vi=vim
 
-alias -g C="| pbcopy"
 alias -g L="| less -R"
 alias -g T="| tail -f"
 
-## ls
 alias ls='ls --color=auto -aF'
 alias ll="ls -lh"
 
@@ -91,23 +141,13 @@ if [ -n "$TMUX" ]; then
   alias ssh=ssh_tmux
 fi
 
-# npm
+# npmの補完
 type npm > /dev/null 2>&1 && source <(npm completion)
-
-# sindresorhus/pure (Pretty, minimal and fast ZSH prompt) - https://github.com/sindresorhus/pure
-autoload -U promptinit && promptinit
-prompt pure
 
 # MacVim KaoriYa - http://codesource.google.com/p/macvim-kaoriya/
 case ${OSTYPE} in
   darwin*)
     alias vim="~/Applications/MacVim.app/Contents/MacOS/mvim --remote-tab-silent"
-esac
-
-# marzocchi/zsh-notify - https://github.com/marzocchi/zsh-notify
-case ${OSTYPE} in
-  darwin*)
-    source ~/.zsh/zsh-notify/notify.plugin.zsh
 esac
 
 # ssh port fowarding
@@ -116,8 +156,7 @@ function sshpf() {
 }
 
 # knu/z - https://github.com/knu/z
-autoload -Uz is-at-least
-source ~/.zsh/z/z.sh
+# source ~/.zsh/z/z.sh
 
 # cdd を tmux, bash, multi session +α に対応した - @m4i's blog - http://blog.m4i.jp/entry/2012/01/26/064329
 source ~/.zsh/cdd/cdd
@@ -129,7 +168,7 @@ chpwd() {
 case ${OSTYPE} in
   darwin*)
     function ejectAll() {
-      osascript -e "tell application \"Finder\" to eject (every disk whose ejectable is true and local volume is true and free space is not equal to 0)"
+      osascript -e 'tell application "Finder" to eject (every disk whose ejectable is true and local volume is true and free space is not equal to 0)'
     }
     alias unmountAll=ejectAll
 esac
@@ -140,14 +179,29 @@ if [ -d ~/.anyenv/ ]; then
 fi
 
 # direnv - unclutter your .profile - http://direnv.net/
-eval "$(direnv hook zsh)"
+if type direnv > /dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
 
 # tmuxのウィンドウ名をカレントディレクトリにする - ミントフレーバー緑茶 - http://mint.hateblo.jp/entry/2012/12/17/175553
 show-current-dir-as-window-name() {
+  if [ -n "$TMUX" ]; then
     tmux set-window-option window-status-format "#I:${PWD:t}" > /dev/null
+  fi
 }
 show-current-dir-as-window-name
 add-zsh-hook chpwd show-current-dir-as-window-name
+
+# ESlint
+function esw() {
+  chokidar $1 -c "eslint {path} && echo '\u001b[32m✓ success\u001b[0m'"
+}
+
+# Docker
+case ${OSTYPE} in
+  darwin*)
+    eval $(docker-machine env local)
+esac
 
 # 外出しした設定ファイル
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

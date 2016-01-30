@@ -8,5 +8,8 @@
       "Cmd": "migemogrep",
       "BufferThreshold": 10000
     }
+  },
+  "Keymap": {
+    "Tab": "peco.SelectDown"
   }
 }

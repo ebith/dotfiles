@@ -19,12 +19,16 @@ esac
 
 # golang
 export GOPATH=$HOME/.go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
 
 # riywo/anyenv - https://github.com/riywo/anyenv
 if [ -d ~/.anyenv/ ]; then
   export PATH="$HOME/.anyenv/bin:$PATH"
+  # for thinca/vim-quickrun
+  # for rPath in ~/.anyenv/envs/*(/); do
+  #     aPath=`readlink -f $rPath`
+  #     export PATH="$aPath/shims:$PATH"
+  # done
 fi
 
 # Node.js

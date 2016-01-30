@@ -1,23 +1,6 @@
-# Use peco (https://github.com/peco/peco) to search ZSH's history via ctrl+R - https://gist.github.com/jimeh/7d94f1000cfc9cba2893
-function peco_select_history() {
-  BUFFER=$(fc -l -n 1 | eval tac | peco --query "$LBUFFER")
-  CURSOR=$#BUFFER
-  zle -R -c
-}
-zle -N peco_select_history
-bindkey '^R' peco_select_history
+function gcd() { \cd $(ghq list --p | peco) }
+zle -N gcd
+bindkey '^xg' gcd
+bindkey '^x^g' gcd
 
-# 私のpeco活用事例 - k0kubun's blog - http://k0kubun.hatenablog.com/entry/2014/07/06/033336
-function peco-pkill() {
-  for pid in `ps aux | peco | awk '{ print $2 }'`
-    do
-      kill $pid
-        echo "Killed ${pid}"
-        done
-}
-alias pkill="peco-pkill"
-
-function pghq() {
-  cd $(ghq list -p | peco)
-}
 # vim: ft=zsh

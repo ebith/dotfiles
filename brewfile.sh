@@ -15,20 +15,18 @@ brew install coreutils
 brew install git
 brew install httpie
 brew install jq
-brew install phantomjs
 brew install pwgen
 brew install reattach-to-user-namespace
 brew install ssh-copy-id
 brew install sshfs
-brew install terminal-notifier
 brew install tig
 brew install tmux
 brew install tree
 brew install wget
 brew install zsh --disable-etcdir
-brew install zsh-completions
 brew install ttyrec
 brew install direnv
+brew install weechat
 
 brew install laurent22/massren/massren
 brew install motemen/ghq/ghq
