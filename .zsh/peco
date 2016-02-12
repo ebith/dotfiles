@@ -1,6 +1,0 @@
-function gcd() { \cd $(ghq list --p | peco) }
-zle -N gcd
-bindkey '^xg' gcd
-bindkey '^x^g' gcd
-
-# vim: ft=zsh

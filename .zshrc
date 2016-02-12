@@ -6,7 +6,7 @@ zplug "b4b4r07/zplug"
 
 zplug "zsh-users/zsh-completions"
 # backward-kill-wordが死ぬ。Zsh 5.3で直るらしい
-# zplug "zsh-users/zsh-syntax-highlighting"
+# zplug "zsh-users/zsh-syntax-highlighting", nice:10
 # zsh-syntax-highlighting が無いとエラー吐く
 # zplug "zsh-users/zsh-history-substring-search"
 
@@ -14,10 +14,12 @@ zplug "rimraf/k"
 
 zplug "mafredri/zsh-async" | zplug "sindresorhus/pure"
 
-zplug "b4b4r07/enhancd", of:enhancd.sh
-# zplug "knu/z", of:z.sh
+# zplug "b4b4r07/enhancd", of:enhancd.sh
+zplug "knu/z", of:z.sh, nice:10
 
 zplug "mollifier/anyframe"
+
+zplug "m4i/cdd", of:cdd
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -30,21 +32,23 @@ zplug load --verbose
 ########################################
 # plugin setting
 ########################################
+# m4i/cdd - https://github.com/m4i/cdd
+chpwd() {
+  _cdd_chpwd
+}
 
 # mollifier/anyframe: peco/percol/fzf wrapper plugin for zsh - https://github.com/mollifier/anyframe
-bindkey '^r' anyframe-widget-execute-history
-bindkey '^xi' anyframe-widget-put-history
-bindkey '^x^i' anyframe-widget-put-history
-# alias gcd=anyframe-widget-cd-ghq-repository
-# bindkey '^xg' anyframe-widget-cd-ghq-repository
-# bindkey '^x^g' anyframe-widget-cd-ghq-repository
+bindkey '^r' anyframe-widget-put-history
 alias pkill=anyframe-widget-kill
 bindkey '^xk' anyframe-widget-kill
 bindkey '^x^k' anyframe-widget-kill
+alias gcd=anyframe-widget-cd-ghq-repository
+bindkey '^xg' anyframe-widget-cd-ghq-repository
+bindkey '^x^g' anyframe-widget-cd-ghq-repository
 
 # zsh-users/zsh-history-substring-search: ZSH port of Fish shell's history search feature. - https://github.com/zsh-users/zsh-history-substring-search
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
+# bindkey '^P' history-substring-search-up
+# bindkey '^N' history-substring-search-down
 
 #################### 未整理 ####################
 # $PATHを重複させない
@@ -52,8 +56,8 @@ typeset -U PATH
 
 # 補完関係
 [[ -d /usr/local/share/zsh/site-functions ]] && fpath=(/usr/local/share/zsh/site-functions $fpath)
-fpath=($HOME/.zsh/.zfunctions $HOME/.zsh/zsh-completions/src $fpath)
-autoload -Uz compinit && compinit
+fpath=($HOME/.zsh/zsh-completions/src $fpath)
+autoload -Uz compinit && compinit -C
 
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -125,8 +129,7 @@ alias pgrep="pgrep -fl"
 export LANG=ja_JP.UTF-8
 export TERM=xterm-256color
 
-# もしかして:
-SPROMPT="correct: %R -> %r ? "
+SPROMPT="もしかして: %R -> %r ? "
 
 # dircolors
 eval `dircolors ~/.zsh/dircolors-solarized/dircolors.256dark`
@@ -155,15 +158,6 @@ function sshpf() {
   \ssh -fL $1\:localhost\:$1 sakura -N
 }
 
-# knu/z - https://github.com/knu/z
-# source ~/.zsh/z/z.sh
-
-# cdd を tmux, bash, multi session +α に対応した - @m4i's blog - http://blog.m4i.jp/entry/2012/01/26/064329
-source ~/.zsh/cdd/cdd
-chpwd() {
-  _cdd_chpwd
-}
-
 # Eject All
 case ${OSTYPE} in
   darwin*)
@@ -175,7 +169,7 @@ esac
 
 # riywo/anyenv - https://github.com/riywo/anyenv
 if [ -d ~/.anyenv/ ]; then
-  eval "$(anyenv init -)"
+  eval "$(anyenv init - --no-rehash)"
 fi
 
 # direnv - unclutter your .profile - http://direnv.net/
@@ -183,26 +177,27 @@ if type direnv > /dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
 
-# tmuxのウィンドウ名をカレントディレクトリにする - ミントフレーバー緑茶 - http://mint.hateblo.jp/entry/2012/12/17/175553
-show-current-dir-as-window-name() {
-  if [ -n "$TMUX" ]; then
-    tmux set-window-option window-status-format "#I:${PWD:t}" > /dev/null
-  fi
-}
-show-current-dir-as-window-name
-add-zsh-hook chpwd show-current-dir-as-window-name
-
 # ESlint
 function esw() {
   chokidar $1 -c "eslint {path} && echo '\u001b[32m✓ success\u001b[0m'"
 }
 
 # Docker
-case ${OSTYPE} in
-  darwin*)
-    eval $(docker-machine env local)
-esac
+function setDockerEnv {
+  eval $(docker-machine env $1)
+}
+function _setDockerEnv {
+  if (( CURRENT == 2 )); then
+    compadd $(docker-machine ls | awk '/Running/ {print $1}')
+  fi
+  return 1;
+}
+compdef _setDockerEnv setDockerEnv
+
+# Node.js
+function nodeAppInstall {
+  npm i -g chokidar-cli eslint
+}
 
 # 外出しした設定ファイル
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-source ~/.zsh/peco
