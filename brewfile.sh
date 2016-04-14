@@ -27,6 +27,7 @@ brew install zsh --disable-etcdir
 brew install ttyrec
 brew install direnv
 brew install weechat
+brew install htop
 
 brew install laurent22/massren/massren
 brew install motemen/ghq/ghq

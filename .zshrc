@@ -1,37 +1,44 @@
+# $PATHを重複させない
+typeset -U PATH
+
+# 補完を有効にする
+autoload -Uz compinit && compinit -C
+
 ########################################
-# zplug
+# zgen
 ########################################
-source ~/.zplug/zplug
-zplug "b4b4r07/zplug"
+source "${HOME}/.zgen/zgen.zsh"
+if ! zgen saved; then
+  zgen load zsh-users/zsh-completions src
+  # backward-kill-wordが死ぬ。Zsh 5.3で直るらしい
+  # zgen load zsh-users/zsh-syntax-highlighting
+  # zsh-syntax-highlighting が無いとエラー吐く
+  # zgen load zsh-users/zsh-history-substring-search
 
-zplug "zsh-users/zsh-completions"
-# backward-kill-wordが死ぬ。Zsh 5.3で直るらしい
-# zplug "zsh-users/zsh-syntax-highlighting", nice:10
-# zsh-syntax-highlighting が無いとエラー吐く
-# zplug "zsh-users/zsh-history-substring-search"
+  zgen load rimraf/k
 
-zplug "rimraf/k"
+  zgen load mafredri/zsh-async
+  zgen load sindresorhus/pure
 
-zplug "mafredri/zsh-async" | zplug "sindresorhus/pure"
+  # 最近のは補完が出ないので'634055748fdf5167d37540c07cd653bb2f196d59'で止めてる
+  zgen load knu/z z.sh
 
-# zplug "b4b4r07/enhancd", of:enhancd.sh
-zplug "knu/z", of:z.sh, nice:10
+  zgen load mollifier/anyframe
 
-zplug "mollifier/anyframe"
+  zgen load m4i/cdd cdd
 
-zplug "m4i/cdd", of:cdd
+  zgen load seebi/dircolors-solarized
 
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+  zgen save
 fi
-zplug load --verbose
 
 ########################################
 # plugin setting
 ########################################
+# seebi/dircolors-solarized
+eval `dircolors ~/.zgen/seebi/dircolors-solarized-master/dircolors.256dark`
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
 # m4i/cdd - https://github.com/m4i/cdd
 chpwd() {
   _cdd_chpwd
@@ -51,14 +58,6 @@ bindkey '^x^g' anyframe-widget-cd-ghq-repository
 # bindkey '^N' history-substring-search-down
 
 #################### 未整理 ####################
-# $PATHを重複させない
-typeset -U PATH
-
-# 補完関係
-[[ -d /usr/local/share/zsh/site-functions ]] && fpath=(/usr/local/share/zsh/site-functions $fpath)
-fpath=($HOME/.zsh/zsh-completions/src $fpath)
-autoload -Uz compinit && compinit -C
-
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
@@ -130,10 +129,6 @@ export LANG=ja_JP.UTF-8
 export TERM=xterm-256color
 
 SPROMPT="もしかして: %R -> %r ? "
-
-# dircolors
-eval `dircolors ~/.zsh/dircolors-solarized/dircolors.256dark`
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # tmux
 if [ -n "$TMUX" ]; then
