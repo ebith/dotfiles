@@ -1,9 +1,3 @@
 ---
-:backtrace: false
-:benchmark: false
-:bulk_threshold: 1000
-:sources:
-- http://production.s3.rubygems.org
-:update_sources: true
-:verbose: true
-gem: --no-ri --no-rdoc
+install: --no-document
+update: --no-document

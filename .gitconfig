@@ -10,6 +10,7 @@
   ci = commit -v
   co = checkout
   ls = log --stat
+  l = log --graph --decorate --all --oneline
   sm = submodule
   st = status
   up = pull --rebase
