@@ -5,38 +5,41 @@ typeset -U PATH
 autoload -Uz compinit && compinit -C
 
 ########################################
-# zgen
+# zplug
 ########################################
-source "${HOME}/.zgen/zgen.zsh"
-if ! zgen saved; then
-  zgen load zsh-users/zsh-completions src
-  # backward-kill-wordが死ぬ。Zsh 5.3で直るらしい
-  # zgen load zsh-users/zsh-syntax-highlighting
-  # zsh-syntax-highlighting が無いとエラー吐く
-  # zgen load zsh-users/zsh-history-substring-search
+source ~/.zplug/init.zsh
 
-  zgen load rimraf/k
+zplug 'zsh-users/zsh-completions', depth:1
+zplug 'zsh-users/zsh-history-substring-search'
+zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 
-  zgen load mafredri/zsh-async
-  zgen load sindresorhus/pure
+# zplug 'mollifier/anyframe'
 
-  # 最近のは補完が出ないので'634055748fdf5167d37540c07cd653bb2f196d59'で止めてる
-  zgen load knu/z z.sh
+zplug 'supercrabtree/k'
 
-  zgen load mollifier/anyframe
+zplug 'mafredri/zsh-async'
+zplug 'sindresorhus/pure', use:pure.zsh, as:theme
 
-  zgen load m4i/cdd cdd
+zplug 'b4b4r07/enhancd', use:init.sh
 
-  zgen load seebi/dircolors-solarized
+zplug 'm4i/cdd', use:cdd
 
-  zgen save
+zplug 'seebi/dircolors-solarized'
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
 fi
 
+# zplug load --verbose
+zplug load
 ########################################
 # plugin setting
 ########################################
-# seebi/dircolors-solarized
-eval `dircolors ~/.zgen/seebi/dircolors-solarized-master/dircolors.256dark`
+# # seebi/dircolors-solarized
+eval `dircolors $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # m4i/cdd - https://github.com/m4i/cdd
@@ -44,18 +47,9 @@ chpwd() {
   _cdd_chpwd
 }
 
-# mollifier/anyframe: peco/percol/fzf wrapper plugin for zsh - https://github.com/mollifier/anyframe
-bindkey '^r' anyframe-widget-put-history
-alias pkill=anyframe-widget-kill
-bindkey '^xk' anyframe-widget-kill
-bindkey '^x^k' anyframe-widget-kill
-alias gcd=anyframe-widget-cd-ghq-repository
-bindkey '^xg' anyframe-widget-cd-ghq-repository
-bindkey '^x^g' anyframe-widget-cd-ghq-repository
-
 # zsh-users/zsh-history-substring-search: ZSH port of Fish shell's history search feature. - https://github.com/zsh-users/zsh-history-substring-search
-# bindkey '^P' history-substring-search-up
-# bindkey '^N' history-substring-search-down
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
 
 #################### 未整理 ####################
 # 補完で小文字でも大文字にマッチさせる
@@ -193,6 +187,34 @@ compdef _setDockerEnv setDockerEnv
 function nodeAppInstall {
   npm i -g chokidar-cli eslint
 }
+
+# Peco
+peco-ghq() {
+    local selected
+    selected="$(ghq list --full-path | peco --query="$LBUFFER")"
+    if [ -n "$selected" ]; then
+        BUFFER="builtin cd $selected"
+        zle accept-line
+    fi
+    zle reset-prompt
+}
+zle -N peco-ghq
+bindkey '^]' peco-ghq
+
+function peco_select_history() {
+  BUFFER=$(history -nr 1 | peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle -R -c
+}
+zle -N peco_select_history
+bindkey '^R' peco_select_history
+
+function peco-kill-process () {
+    ps -ef | peco | awk '{ print $2 }' | xargs kill
+    zle clear-screen
+}
+zle -N peco-kill-process
+bindkey '^k' peco-kill-process
 
 # 外出しした設定ファイル
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
