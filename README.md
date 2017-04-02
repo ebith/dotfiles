@@ -1,6 +1,6 @@
 # INSTALL
 ``` sh
-git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
+curl -sL zplug.sh/installer | zsh
 
 git clone git@github.com:ebith/dotfiles.git "${HOME}/dotfiles"
 ~/dotfiles/create_link.sh

@@ -139,12 +139,16 @@ type npm > /dev/null 2>&1 && source <(npm completion)
 # MacVim KaoriYa - http://codesource.google.com/p/macvim-kaoriya/
 case ${OSTYPE} in
   darwin*)
-    alias vim="~/Applications/MacVim.app/Contents/MacOS/mvim --remote-tab-silent"
+    alias vim="~/Applications/MacVim.app/Contents/bin/mvim --remote-tab-silent"
 esac
 
 # ssh port fowarding
 function sshpf() {
   \ssh -fL $1\:localhost\:$1 sakura -N
+}
+
+function fileScan() {
+  du -h | sort -hr | head -$1
 }
 
 # Eject All
