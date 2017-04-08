@@ -13,18 +13,10 @@ zplug 'zsh-users/zsh-completions', depth:1
 zplug 'zsh-users/zsh-history-substring-search'
 zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 
-# zplug 'mollifier/anyframe'
-
-zplug 'supercrabtree/k'
-
 zplug 'mafredri/zsh-async'
 zplug 'sindresorhus/pure', use:pure.zsh, as:theme
 
 zplug 'b4b4r07/enhancd', use:init.sh
-
-zplug 'm4i/cdd', use:cdd
-
-zplug 'seebi/dircolors-solarized'
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -35,18 +27,10 @@ fi
 
 # zplug load --verbose
 zplug load
+
 ########################################
 # plugin setting
 ########################################
-# # seebi/dircolors-solarized
-eval `dircolors $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-
-# m4i/cdd - https://github.com/m4i/cdd
-chpwd() {
-  _cdd_chpwd
-}
-
 # zsh-users/zsh-history-substring-search: ZSH port of Fish shell's history search feature. - https://github.com/zsh-users/zsh-history-substring-search
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
@@ -59,10 +43,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' ignore-parents parent pwd ..
 
 # sudo の後ろでコマンド名を補完する
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
-
-# ps コマンドのプロセス名補完
-zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
 
 # $colors[red]とか書けるようになる
 autoload -Uz colors && colors
@@ -78,13 +59,6 @@ setopt hist_ignore_space
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
-
-# 賢く履歴を辿る
-autoload -Uz history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
 
 setopt correct
 setopt list_packed
@@ -109,6 +83,7 @@ zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
 
 # alias
+alias wget='wget --no-hsts'
 alias vi=vim
 
 alias -g L="| less -R"
@@ -133,13 +108,10 @@ if [ -n "$TMUX" ]; then
   alias ssh=ssh_tmux
 fi
 
-# npmの補完
-type npm > /dev/null 2>&1 && source <(npm completion)
-
 # MacVim KaoriYa - http://codesource.google.com/p/macvim-kaoriya/
 case ${OSTYPE} in
   darwin*)
-    alias vim="~/Applications/MacVim.app/Contents/bin/mvim --remote-tab-silent"
+    alias vim="/Applications/MacVim.app/Contents/bin/mvim --remote-tab-silent"
 esac
 
 # ssh port fowarding
@@ -160,37 +132,10 @@ case ${OSTYPE} in
     alias unmountAll=ejectAll
 esac
 
-# riywo/anyenv - https://github.com/riywo/anyenv
-if [ -d ~/.anyenv/ ]; then
-  eval "$(anyenv init - --no-rehash)"
-fi
-
 # direnv - unclutter your .profile - http://direnv.net/
 if type direnv > /dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
-
-# ESlint
-function esw() {
-  chokidar $1 -c "eslint {path} && echo '\u001b[32m✓ success\u001b[0m'"
-}
-
-# Docker
-function setDockerEnv {
-  eval $(docker-machine env $1)
-}
-function _setDockerEnv {
-  if (( CURRENT == 2 )); then
-    compadd $(docker-machine ls | awk '/Running/ {print $1}')
-  fi
-  return 1;
-}
-compdef _setDockerEnv setDockerEnv
-
-# Node.js
-function nodeAppInstall {
-  npm i -g chokidar-cli eslint
-}
 
 # Peco
 peco-ghq() {

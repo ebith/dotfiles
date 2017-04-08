@@ -2,8 +2,8 @@
 ``` sh
 curl -sL zplug.sh/installer | zsh
 
-git clone git@github.com:ebith/dotfiles.git "${HOME}/dotfiles"
-~/dotfiles/create_link.sh
+ghq get ebith/dotfiles
+~/.ghq/github.com/ebith/dotfiles/create_link.sh
 ```
 
 # for Mac

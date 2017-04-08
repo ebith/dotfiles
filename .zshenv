@@ -21,16 +21,6 @@ esac
 export GOPATH=$HOME/.go
 export PATH=$GOPATH/bin:$PATH
 
-# riywo/anyenv - https://github.com/riywo/anyenv
-if [ -d ~/.anyenv/ ]; then
-  export PATH="$HOME/.anyenv/bin:$PATH"
-  # for thinca/vim-quickrun
-  # for rPath in ~/.anyenv/envs/*(/); do
-  #     aPath=`readlink -f $rPath`
-  #     export PATH="$aPath/shims:$PATH"
-  # done
-fi
-
 # Node.js
-export PATH=./node_modules/.bin:$PATH
-alias gulp="nocorrect gulp"
+# export PATH="./node_modules/.bin:$PATH"
+export PATH="$(yarn global bin):$PATH"
