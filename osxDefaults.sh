@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # .DS_Storeを作らせない
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
