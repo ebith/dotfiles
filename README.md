@@ -8,10 +8,6 @@ ghq get ebith/dotfiles
 
 # for Mac
 ## [Homebrew — The missing package manager for macOS](http://brew.sh/)
-``` sh
-brew tap Homebrew/bundle
-brew bundle --file=~/dotfiles/Brewfile
-```
 
 ## [mac - Increase the maximum number of open file descriptors in Snow Leopard? - Super User](https://superuser.com/a/1171023)
 ```sh
