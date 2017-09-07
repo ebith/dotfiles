@@ -2,12 +2,14 @@
 typeset -U PATH
 
 # 補完を有効にする
-autoload -Uz compinit && compinit -C
+# zplug 使用時は必要ない
+# autoload -Uz compinit && compinit -C
 
 ########################################
 # zplug
 ########################################
 source ~/.zplug/init.zsh
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug 'zsh-users/zsh-completions', depth:1
 zplug 'zsh-users/zsh-history-substring-search'
@@ -25,7 +27,6 @@ if ! zplug check --verbose; then
     fi
 fi
 
-# zplug load --verbose
 zplug load
 
 ########################################
@@ -52,10 +53,7 @@ autoload -Uz colors && colors
 setopt ignore_eof
 
 # 履歴関係
-setopt share_history
-setopt hist_reduce_blanks
-setopt hist_ignore_all_dups
-setopt hist_ignore_space
+setopt share_history hist_reduce_blanks hist_ignore_all_dups
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
@@ -73,9 +71,6 @@ setopt nullglob
 # =のあともパス名保管する
 setopt magic_equal_subst
 
-# historyを上書きではなく追記する
-setopt append_history
-
 # 単語の区切り文字を指定する (C-wでディレクトリ一つだけ削除できるように)
 autoload -Uz select-word-style
 select-word-style default
@@ -83,14 +78,16 @@ zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
 
 # alias
+alias npm=yarn
 alias wget='wget --no-hsts'
 alias vi=vim
 
 alias -g L="| less -R"
 alias -g T="| tail -f"
 
-alias ls='ls --color=auto -aF'
-alias ll="ls -lh"
+alias ls='exa -a'
+alias ll='exa -al'
+alias lls='exa -al -s modified'
 
 alias pgrep="pgrep -fl"
 
@@ -114,11 +111,6 @@ case ${OSTYPE} in
     alias vim="/Applications/MacVim.app/Contents/bin/mvim --remote-tab-silent"
 esac
 
-# ssh port fowarding
-function sshpf() {
-  \ssh -fL $1\:localhost\:$1 sakura -N
-}
-
 function fileScan() {
   du -h | sort -hr | head -$1
 }
@@ -131,11 +123,6 @@ case ${OSTYPE} in
     }
     alias unmountAll=ejectAll
 esac
-
-# direnv - unclutter your .profile - http://direnv.net/
-if type direnv > /dev/null 2>&1; then
-  eval "$(direnv hook zsh)"
-fi
 
 # Peco
 peco-ghq() {
@@ -165,5 +152,15 @@ function peco-kill-process () {
 zle -N peco-kill-process
 bindkey '^k' peco-kill-process
 
+# Google Cloud SDK.
+function loadGCSDK() {
+  if [ -f '/Users/ebith/external/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/ebith/external/google-cloud-sdk/path.zsh.inc'; fi
+  if [ -f '/Users/ebith/external/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/ebith/external/google-cloud-sdk/completion.zsh.inc'; fi
+}
+
 # 外出しした設定ファイル
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+if [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
+   zcompile ~/.zshrc
+fi

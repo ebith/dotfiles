@@ -11,9 +11,9 @@ fi
 # Macでもgnu coreutils使う
 case ${OSTYPE} in
   darwin*)
-    if [ -d $(brew --prefix coreutils)/libexec/gnubin ]; then
-      export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-      export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
+    if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
+      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+      export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
     fi
 esac
 
@@ -22,5 +22,8 @@ export GOPATH=$HOME/.go
 export PATH=$GOPATH/bin:$PATH
 
 # Node.js
-# export PATH="./node_modules/.bin:$PATH"
-export PATH="$(yarn global bin):$PATH"
+export PATH="./node_modules/.bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+
+# theos
+export THEOS=~/.ghq/github.com/theos/theos
