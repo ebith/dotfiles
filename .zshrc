@@ -12,7 +12,6 @@ source ~/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug 'zsh-users/zsh-completions', depth:1
-zplug 'zsh-users/zsh-history-substring-search'
 zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 
 zplug 'mafredri/zsh-async'
@@ -32,11 +31,16 @@ zplug load
 ########################################
 # plugin setting
 ########################################
-# zsh-users/zsh-history-substring-search: ZSH port of Fish shell's history search feature. - https://github.com/zsh-users/zsh-history-substring-search
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
 
-#################### 未整理 ####################
+########################################
+# 未整理 #
+########################################
+autoload -Uz history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^p" history-beginning-search-backward-end
+bindkey "^n" history-beginning-search-forward-end
+
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
