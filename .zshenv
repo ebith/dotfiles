@@ -23,7 +23,7 @@ export PATH=$GOPATH/bin:$PATH
 
 # Node.js
 export PATH="./node_modules/.bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # theos
 export THEOS=~/.ghq/github.com/theos/theos

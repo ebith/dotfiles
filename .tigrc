@@ -1,3 +1,0 @@
-bind main o !@git browse-remote %(commit)
-bind diff o !@git browse-remote %(commit)
-bind log o !@git browse-remote %(commit)

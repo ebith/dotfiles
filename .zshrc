@@ -11,7 +11,7 @@ typeset -U PATH
 source ~/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-zplug 'zsh-users/zsh-completions', depth:1
+zplug 'zsh-users/zsh-completions', depth:1, use:'src/_*', lazy:true
 zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 
 zplug 'mafredri/zsh-async'
@@ -19,12 +19,17 @@ zplug 'sindresorhus/pure', use:pure.zsh, as:theme
 
 zplug 'b4b4r07/enhancd', use:init.sh
 
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
+zplug 'marzocchi/zsh-notify'
+zstyle ':notify:*' command-complete-timeout 10
+zstyle ':notify:*' success-sound "Hero"
+zstyle ':notify:*' error-sound "Basso"
+
+# if ! zplug check --verbose; then
+#     printf "Install? [y/N]: "
+#     if read -q; then
+#         echo; zplug install
+#     fi
+# fi
 
 zplug load
 
@@ -57,7 +62,7 @@ autoload -Uz colors && colors
 setopt ignore_eof
 
 # 履歴関係
-setopt share_history hist_reduce_blanks hist_ignore_all_dups
+setopt share_history hist_reduce_blanks hist_ignore_all_dups append_history inc_append_history
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
@@ -161,6 +166,15 @@ function loadGCSDK() {
   if [ -f '/Users/ebith/external/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/ebith/external/google-cloud-sdk/path.zsh.inc'; fi
   if [ -f '/Users/ebith/external/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/ebith/external/google-cloud-sdk/completion.zsh.inc'; fi
 }
+
+# ファイルの展開, 圧縮
+function xfile () {
+  for file in $*; do
+    7z x -o$file:r $file
+  done
+}
+alias tarxz='tar --use-compress-program=/usr/local/bin/pixz -v'
+
 
 # 外出しした設定ファイル
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
