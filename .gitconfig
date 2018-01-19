@@ -5,7 +5,7 @@
   ui = true
 [alias]
   add = add -v
-  amend = commit --amend --no-edit --date=now
+  amend = commit --amend --date=now
   br = branch
   ci = commit -v
   co = checkout
@@ -22,23 +22,9 @@
   ignored = !git ls-files -v | grep "^[a-z]"
   smup = "submodule foreach 'git fetch;git checkout origin/master'"
 [core]
-  whitespace = cr-at-eol
   editor = vim
-  excludesfile = ~/.gitignore.global
-  filemode = false
-  autocrlf = false
-  safecrlf = false
-  quotepath = false
-  precomposeunicode = true
-[i18n]
-  commitencoding = UTF-8
 [push]
   default = simple
-[browse-remote "github.com"]
-  top = https://{host}/{path}
-  ref = https://{host}/{path}/tree/{short_ref}
-  rev = https://{host}/{path}/commit/{commit}
-  file = "https://{host}/{path}/{file.directory? and :tree or :blob}/{short_rev}/{file}{line && \"#L%d\" % line}"
 [rebase]
   autostash=true
 [url "git@github.com:"]
@@ -48,3 +34,11 @@
   root = ~/.go/src
 [github]
   user = ebith
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+[interactive]
+	diffFilter = diff-highlight
+[diff]
+	compactionHeuristic = true

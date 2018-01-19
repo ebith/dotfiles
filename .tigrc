@@ -1,0 +1,26 @@
+# Tig で Git を自由自在に操作するための .tigrc 設定例 - Qiita - https://qiita.com/sfus/items/063797a1dd8fdc7d032f
+set vertical-split = no
+set split-view-height = 80%
+set line-graphics = utf-8
+set ignore-case = true
+set diff-options = -m --first-parent
+set diff-highlight = true
+
+bind generic g move-first-line
+bind generic E view-grep
+bind generic G move-last-line
+bind main G move-last-line
+bind main <Esc>g :toggle commit-title-graph
+
+bind main  o @hub browse -- commit/%(commit)
+bind blame o @hub browse -- commit/%(commit)
+bind diff  o @hub browse -- commit/%(commit)
+bind tree  o @hub browse -- blob/%(branch)/%(file)
+bind blob  o @hub browse -- blob/%(branch)/%(file)
+bind grep  o @hub browse -- blob/%(branch)/%(file)
+
+color diff-header black magenta
+color diff-chunk black white
+color cursor black green bold
+color title-blur black blue
+color title-focus black blue bold

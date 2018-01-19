@@ -27,3 +27,6 @@ export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # theos
 export THEOS=~/.ghq/github.com/theos/theos
+
+# git diff-highlight
+export PATH="/usr/local/share/git-core/contrib/diff-highlight:$PATH"
