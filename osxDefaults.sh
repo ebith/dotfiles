@@ -15,3 +15,6 @@ defaults write com.apple.dock persistent-apps -array
 
 # 写真アプリを自動起動させない
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool YES
+
+# Finderで隠しファイルを表示する
+defaults write com.apple.finder AppleShowAllFiles TRUE

@@ -175,6 +175,8 @@ function xfile () {
 }
 alias tarxz='tar --use-compress-program=/usr/local/bin/pixz -v'
 
+# yarn
+alias asar='nocorrect asar'
 
 # 外出しした設定ファイル
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
