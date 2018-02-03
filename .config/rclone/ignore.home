@@ -1,0 +1,6 @@
+/.ssh/
+/external/
+/local/
+/.cache/
+/.local/
+node_modules/
