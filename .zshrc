@@ -62,7 +62,13 @@ autoload -Uz colors && colors
 setopt ignore_eof
 
 # 履歴関係
-setopt share_history hist_reduce_blanks hist_ignore_all_dups append_history inc_append_history
+setopt share_history
+setopt hist_reduce_blanks
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt append_history
+setopt inc_append_history
+setopt hist_no_store
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
@@ -147,9 +153,14 @@ zle -N peco-ghq
 bindkey '^]' peco-ghq
 
 function peco_select_history() {
-  BUFFER=$(history -nr 1 | peco --query "$LBUFFER")
-  CURSOR=$#BUFFER
-  zle -R -c
+  local tac
+  { which gtac &> /dev/null && tac="gtac" } || \
+    { which tac &> /dev/null && tac="tac" } || \
+    tac="tail -r"
+  BUFFER=$(fc -l -n 1 | eval $tac | \
+              peco --layout=bottom-up --query "$LBUFFER")
+  CURSOR=$#BUFFER # move cursor
+  zle -R -c       # refresh
 }
 zle -N peco_select_history
 bindkey '^R' peco_select_history
