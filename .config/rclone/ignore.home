@@ -1,6 +1,13 @@
-/.ssh/
-/external/
-/local/
 /.cache/
+/.enhancd/
+/.ghq/
 /.local/
+/.node-gyp/
+/.npm/
+/.ssh/
+/.vim/
+/.vimlocal/
+/.yarn/
+/.zplug/
+/external/
 node_modules/
