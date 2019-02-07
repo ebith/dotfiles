@@ -93,7 +93,6 @@ zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
 
 # alias
-alias npm=yarn
 alias wget='wget --no-hsts'
 alias vi=vim
 
@@ -188,6 +187,10 @@ alias tarxz='tar --use-compress-program=/usr/local/bin/pixz -v'
 
 # yarn
 alias asar='nocorrect asar'
+
+function random () {
+  od -vAn --width=4 -tu4 -N4 </dev/urandom
+}
 
 # 外出しした設定ファイル
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
