@@ -62,16 +62,14 @@ autoload -Uz colors && colors
 setopt ignore_eof
 
 # 履歴関係
-setopt share_history
+setopt inc_append_history
 setopt hist_reduce_blanks
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
-setopt append_history
-setopt inc_append_history
 setopt hist_no_store
 HISTFILE=~/.zsh_history
-HISTSIZE=100000
-SAVEHIST=100000
+HISTSIZE=10000
+SAVEHIST=50000
 
 setopt correct
 setopt list_packed
