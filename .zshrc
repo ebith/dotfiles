@@ -197,6 +197,11 @@ function random () {
  echo $((`od -vAn -tu2 -N2 /dev/urandom` % ${*:-10000}))
 }
 
+function fixCompletion () {
+  rm ~/.zplug/zcompdump
+  exec $SHELL -l
+}
+
 # 外出しした設定ファイル
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
