@@ -186,6 +186,7 @@ function xfile () {
     fi
   done
 }
+alias tarzstd='tar --use-compress-program=pzstd -v'
 alias tarxz='tar --use-compress-program=/usr/local/bin/pixz -v'
 
 # yarn

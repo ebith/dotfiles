@@ -29,3 +29,9 @@ export THEOS=~/.ghq/github.com/theos/theos
 
 # git diff-highlight
 export PATH="/usr/local/share/git-core/contrib/diff-highlight:$PATH"
+
+# Ruby
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# Rust
+export PATH="/Users/ebith/.cargo/bin:$PATH"
