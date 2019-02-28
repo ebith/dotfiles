@@ -180,7 +180,12 @@ function loadGCSDK() {
 # ファイルの展開, 圧縮
 function xfile () {
   for file in $*; do
-    7z x -o$file:r $file
+    rfile=${file:r}
+    if [[ ${rfile:e} == 'tar' ]]; then
+      7z x -so $file | 7z x -si -ttar
+    else
+      7z x $file
+    fi
   done
 }
 alias tarxz='tar --use-compress-program=/usr/local/bin/pixz -v'
