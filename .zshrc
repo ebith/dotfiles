@@ -194,7 +194,7 @@ alias tarxz='tar --use-compress-program=/usr/local/bin/pixz -v'
 alias asar='nocorrect asar'
 
 function random () {
-  od -vAn --width=4 -tu4 -N4 </dev/urandom
+ echo $((`od -vAn -tu2 -N2 /dev/urandom` % ${*:-10000}))
 }
 
 # 外出しした設定ファイル
