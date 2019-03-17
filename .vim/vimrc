@@ -1,0 +1,104 @@
+filetype on
+syntax on
+
+" 折り返し時にインデントを考慮する
+set breakindent
+
+" 常にタブバー表示
+set showtabline=2
+
+" tabと行末のスペースを可視化
+set list listchars=tab:^\ ,trail:~
+
+" 検索
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+" バックスペースで文字消せる
+set backspace=2
+
+" 対応する括弧を強調
+set showmatch
+set matchtime=1
+
+" タブじゃなくてスペースを使う
+set expandtab
+set tabstop=2
+set shiftwidth=2
+
+" 自動インデント
+set smartindent
+
+" コマンドライン補完
+set wildmenu
+set wildchar=<Tab>
+set wildmode=list:full
+
+" エンコーディング
+set fileformats=unix,dos,mac
+set encoding=utf-8
+set fileencodings=utf-8,cp932,euc-jp
+
+" swap, backup, undo
+set swapfile
+set directory=~/.vimlocal/swap
+set nobackup
+set writebackup
+set backupdir=~/.vimlocal/backup
+set undofile
+set undodir=~/.vimlocal/undo
+
+"ステータスラインを常に表示
+set laststatus=2
+
+"入力中のコマンドをステータスに表示する
+set showcmd
+
+" syntaxオンで一行が長すぎると重い
+set synmaxcol=200
+
+" .viminfo
+set viminfo& viminfo+=n~/.vimlocal/.viminfo
+
+" 折りたたみの方法
+set foldmethod=marker
+
+" □や○の文字があってもカーソル位置がずれないようにする。
+set ambiwidth=double
+
+" 矩形選択で自由に移動する
+set virtualedit+=block
+
+" 折り返すと遅い？
+set nowrap
+
+colorscheme wallaby
+
+" key bind
+" ===============================================
+let mapleader = "\<Space>"
+
+inoremap jj <ESC>
+nnoremap <silent> <ESC><ESC> :<C-u>nohl<CR>
+
+" タブ移動
+noremap <C-h> :tabprevious<CR>
+noremap <C-l> :tabnext<CR>
+
+" xで削除した文字はレジスタに入れない
+nnoremap x "_x
+
+" USキーボード用
+noremap ; :
+noremap : ;
+
+" ビジュアルモード時vで行末まで選択
+vnoremap v $h
+
+" vimでキーマッピングする際に考えたほうがいいこと - derisの日記 - http://deris.hatenablog.jp/entry/2013/05/02/192415
+noremap <Leader>h  ^
+noremap <Leader>l  $
+nnoremap <Leader>/  *
+noremap <Leader>m  %
