@@ -1,4 +1,6 @@
 {
   "desktop:on": "/home/pi/bin/wol.sh desktop"
+  "3dPrinter:on": "cd /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter && node /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter/poweron.js",
+  "3dPrinter:off": "cd /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter && node /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter/poweroff.js"
 }
 
