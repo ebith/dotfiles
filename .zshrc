@@ -84,6 +84,8 @@ setopt nullglob
 # =のあともパス名保管する
 setopt magic_equal_subst
 
+setopt noclobber
+
 # 単語の区切り文字を指定する (C-wでディレクトリ一つだけ削除できるように)
 autoload -Uz select-word-style
 select-word-style default
@@ -187,7 +189,7 @@ function xfile () {
   done
 }
 alias tarzstd='tar --use-compress-program=pzstd -v'
-alias tarxz='tar --use-compress-program=/usr/local/bin/pixz -v'
+alias tarxz='tar --use-compress-program=pixz -v'
 
 # yarn
 alias asar='nocorrect asar'
@@ -199,6 +201,16 @@ function random () {
 function fixCompletion () {
   rm ~/.zplug/zcompdump
   exec $SHELL -l
+}
+
+# Port forwarding
+function pfoctopi () {
+  echo -e 'OctoPrint: http://localhost:8080\n'
+  ssh -fNL 8080:octopi.local:80 home
+}
+function pfremopi () {
+  echo -e 'Remopi: http://localhost:42897\n'
+  ssh -fNL 42897:localhost:42897 home
 }
 
 # 外出しした設定ファイル
