@@ -16,30 +16,27 @@
   up = pull --rebase
   df = diff
   dfc = diff --cached
-  cancel = !git commit -a -m 'Temporary commit for cancel' && git reset --hard HEAD~
-  ignore = update-index --assume-unchanged
-  unignore = update-index --no-assume-unchanged
-  ignored = !git ls-files -v | grep "^[a-z]"
-  smup = "submodule foreach 'git fetch;git checkout origin/master'"
   wip = !git add -u && git ci -m 'WIP'
 [core]
   editor = vim
+  pager = delta
 [push]
   default = simple
 [rebase]
-  autostash=true
+  autostash = true
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  features = decorations
+  whitespace-error-style = 22 reverse
+  side-by-side = true
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+
+# GitHub
 [url "git@github.com:"]
   pushinsteadof = https://github.com/
-[ghq]
-  root = ~/.ghq
-  root = ~/.go/src
 [github]
   user = ebith
-[pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
-[interactive]
-	diffFilter = diff-highlight
-[diff]
-	compactionHeuristic = true
