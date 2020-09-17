@@ -19,13 +19,16 @@
   wip = !git add -u && git ci -m 'WIP'
 [core]
   editor = vim
-  pager = delta
 [push]
   default = simple
 [rebase]
   autostash = true
+
+# “dandavison/delta: A viewer for git and diff output” https://github.com/dandavison/delta
+[pager]
+  diff = delta --color-only --theme OneHalfDark
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = delta --color-only --theme OneHalfDark
 [delta]
   features = decorations
   whitespace-error-style = 22 reverse
