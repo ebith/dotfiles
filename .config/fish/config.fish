@@ -1,3 +1,6 @@
+# PATH
+set fish_user_paths $HOME/.cargo/bin $fish_user_paths # Rust
+
 # Suppress welcome message
 set fish_greeting
 
@@ -18,6 +21,8 @@ alias lt='ls --tree'
 
 alias cat='bat --style=plain'
 
+alias wget='wget --no-hsts'
+
 # fzf (https://github.com/jethrokuan/fzf/blob/master/conf.d/fzf_key_bindings.fish)
 set FZF_DISABLE_KEYBINDINGS 1
 bind \cr '__fzf_reverse_isearch'
@@ -32,7 +37,4 @@ if test -x /usr/local/bin/mvim
     mvim $argv
   end
 end
-
-# Rust
-set fish_user_paths $HOME/.cargo/bin $fish_user_paths
 
