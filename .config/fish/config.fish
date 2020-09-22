@@ -12,7 +12,7 @@ end
 starship init fish | source
 
 # Alias
-alias ls='lsd -a'
+alias ls='lsd -a --icon=never'
 alias ll='ls -l'
 alias lt='ls --tree'
 
@@ -32,3 +32,7 @@ if test -x /usr/local/bin/mvim
     mvim $argv
   end
 end
+
+# Rust
+set fish_user_paths $HOME/.cargo/bin $fish_user_paths
+
