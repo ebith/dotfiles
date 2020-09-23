@@ -23,6 +23,8 @@
   default = simple
 [rebase]
   autostash = true
+[pull]
+  rebase=true
 
 # “dandavison/delta: A viewer for git and diff output” https://github.com/dandavison/delta
 [pager]
