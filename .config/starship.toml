@@ -1,0 +1,5 @@
+[hostname]
+style="bold green"
+
+[directory]
+truncate_to_repo=false

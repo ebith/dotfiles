@@ -1,5 +1,9 @@
 # PATH
-set fish_user_paths $HOME/.cargo/bin $fish_user_paths # Rust
+## Rust
+set fish_user_paths $HOME/.cargo/bin $fish_user_paths
+## Go
+set -x GOPATH $HOME/.go
+set fish_user_paths $GOPATH/bin $fish_user_paths
 
 # Suppress welcome message
 set fish_greeting
@@ -19,7 +23,9 @@ alias ls='lsd -a --icon=never'
 alias ll='ls -l'
 alias lt='ls --tree'
 
-alias cat='bat --style=plain'
+alias bat='bat --theme="Monokai Extended Bright"'
+alias cat='bat --plain'
+alias dog='cat > /dev/null'
 
 alias wget='wget --no-hsts'
 
