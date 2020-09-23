@@ -1,5 +1,9 @@
+[username]
+disabled=true
+
 [hostname]
 style="bold green"
+disabled=true
 
 [directory]
 truncate_to_repo=false

@@ -3,6 +3,11 @@
 ## Usage
 ```sh
 ./create_link.py .config .gitconfig .tmux.conf .yarnrc
+mkdir -p ~/.vimlocal/{backup,swap,undo}
+chsh -s $(which fish)
+sudo systemctl reboot
+rm .bash* .profile
+fisher
 ```
 
 ### tmux
