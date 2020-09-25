@@ -29,8 +29,10 @@ alias dog='cat > /dev/null'
 
 alias wget='wget --no-hsts'
 
-# fzf (https://github.com/jethrokuan/fzf/blob/master/conf.d/fzf_key_bindings.fish)
+# fzf [jethrokuan/fzf: Ef-🐟-ient fish keybindings for fzf](https://github.com/jethrokuan/fzf)
 set FZF_DISABLE_KEYBINDINGS 1
+set FZF_FIND_FILE_COMMAND 'fd --type file --hidden --follow --exclude .git'
+bind \ct '__fzf_find_file'
 bind \cr '__fzf_reverse_isearch'
 alias cdf='__fzf_cd --hidden'
 
