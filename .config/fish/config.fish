@@ -31,7 +31,9 @@ alias cdf='__fzf_cd --hidden'
 
 # tmux
 if test -z $TMUX && status --is-login
-  tmux new-session -A -s 0
+#   tmux new-session -A -s 0
+  echo '**TMUX**'
+  tmux ls
 end
 
 # MacVim
