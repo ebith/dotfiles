@@ -8,13 +8,6 @@ set fish_user_paths $GOPATH/bin $fish_user_paths
 # Suppress welcome message
 set fish_greeting
 
-# jorgebucaran/fisher: A package manager for the fish shell. - https://github.com/jorgebucaran/fisher
-if not functions -q fisher
-    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-    curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
-    fish -c fisher
-end
-
 # Starship: Cross-Shell Prompt - https://starship.rs/
 starship init fish | source
 
@@ -35,6 +28,11 @@ set FZF_FIND_FILE_COMMAND 'fd --type file --hidden --follow --exclude .git'
 bind \ct '__fzf_find_file'
 bind \cr '__fzf_reverse_isearch'
 alias cdf='__fzf_cd --hidden'
+
+# tmux
+if test -z $TMUX && status --is-login
+  tmux new-session -A -s 0
+end
 
 # MacVim
 if test -x /usr/local/bin/mvim
