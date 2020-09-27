@@ -24,7 +24,7 @@ alias wget='wget --no-hsts'
 
 alias pfgrafana='ssh -fNL 3000:localhost:3000 home'
 alias pfoctopi='ssh -fNL 8080:octopi.local:80 home'
-alias pfremopi='ssh -fNL 42897:raspi3b.local:42897 home'
+alias pfremopi='ssh -fNL 42897:raspberrypi3b.local:42897 home'
 
 # fzf [jethrokuan/fzf: Ef-🐟-ient fish keybindings for fzf](https://github.com/jethrokuan/fzf)
 set FZF_DISABLE_KEYBINDINGS 1
@@ -36,7 +36,7 @@ alias cdf='__fzf_cd --hidden'
 # tmux
 if test -z $TMUX && status --is-login
 #   tmux new-session -A -s 0
-  echo '**TMUX**'
+  echo -e '\n\e[7m**TMUX**\e[m'
   tmux ls
 end
 
