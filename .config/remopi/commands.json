@@ -1,5 +1,5 @@
 {
-  "desktop:on": "/home/pi/bin/wol.sh desktop"
+  "desktop:on": "wakeonlan 00:D8:61:A2:FF:21",
   "3dPrinter:on": "cd /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter && node /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter/poweron.js",
   "3dPrinter:off": "cd /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter && node /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter/poweroff.js"
 }
