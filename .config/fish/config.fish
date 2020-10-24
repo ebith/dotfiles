@@ -1,4 +1,7 @@
 # PATH
+## Homebrew
+set -x HOMEBREW_NO_ANALYTICS 1
+eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 ## Rust
 set fish_user_paths $HOME/.cargo/bin $fish_user_paths
 ## Go
@@ -39,14 +42,3 @@ if test -z $TMUX && status --is-login
   echo -e '\n\e[7m**TMUX**\e[m'
   tmux ls
 end
-
-# MacVim
-if test -x /usr/local/bin/mvim
-  function vi
-    mvim $argv
-  end
-  function vim
-    mvim $argv
-  end
-end
-
