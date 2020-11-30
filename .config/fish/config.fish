@@ -1,7 +1,9 @@
 # PATH
 ## Homebrew
-set -x HOMEBREW_NO_ANALYTICS 1
-eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+if test -x /home/linuxbrew/.linuxbrew/bin/brew
+  set -x HOMEBREW_NO_ANALYTICS 1
+  eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+end
 ## Rust
 set fish_user_paths $HOME/.cargo/bin $fish_user_paths
 ## Go
