@@ -28,9 +28,9 @@
 
 # “dandavison/delta: A viewer for git and diff output” https://github.com/dandavison/delta
 [pager]
-  diff = delta --color-only --theme OneHalfDark
+  diff = delta --color-only --syntax-theme OneHalfDark
 [interactive]
-  diffFilter = delta --color-only --theme OneHalfDark
+  diffFilter = delta --color-only --syntax-theme OneHalfDark
 [delta]
   features = decorations
   whitespace-error-style = 22 reverse
@@ -45,3 +45,7 @@
   pushinsteadof = https://github.com/
 [github]
   user = ebith
+[credential]
+	helper = manager-core
+[credential "helperselector"]
+	selected = manager-core
