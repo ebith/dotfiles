@@ -16,6 +16,9 @@ set fish_greeting
 # Starship: Cross-Shell Prompt - https://starship.rs/
 starship init fish | source
 
+# ajeetdsouza/zoxide: A faster way to navigate your filesystem - https://github.com/ajeetdsouza/zoxide
+zoxide init fish | source
+
 # Alias
 alias ls='lsd -a --icon=never'
 alias ll='ls -l'

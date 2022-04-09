@@ -45,7 +45,5 @@
   pushinsteadof = https://github.com/
 [github]
   user = ebith
-[credential]
-	helper = manager-core
-[credential "helperselector"]
-	selected = manager-core
+[init]
+  defaultBranch = main
