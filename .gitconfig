@@ -17,6 +17,7 @@
   df = diff
   dfc = diff --cached
   wip = !git add -u && git ci -m 'WIP'
+  pushf = push --force-with-lease --force-if-includes
 [core]
   editor = vim
 [push]
