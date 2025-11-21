@@ -42,7 +42,7 @@ bind \cr '__fzf_reverse_isearch'
 alias cdf='__fzf_cd --hidden'
 
 # tmux
-if test -z $TMUX && status --is-login
+if test -e tmux && test -z $TMUX && status --is-login
 #   tmux new-session -A -s 0
   echo -e '\n\e[7m**TMUX**\e[m'
   tmux ls
