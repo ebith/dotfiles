@@ -6,12 +6,13 @@ SETUVAR FZF_LEGACY_KEYBINDINGS:1
 SETUVAR FZF_PREVIEW_DIR_CMD:ls
 SETUVAR FZF_PREVIEW_FILE_CMD:head\x20\x2dn\x2010
 SETUVAR FZF_TMUX_HEIGHT:40\x25
-SETUVAR __fish_initialized:3400
-SETUVAR _fisher_decors_2F_fish_2D_ghq_files:/home/ebith/\x2econfig/fish/functions/__ghq_repository_search\x2efish\x1e/home/ebith/\x2econfig/fish/conf\x2ed/ghq_key_bindings\x2efish\x1e/home/ebith/\x2econfig/fish/completions/ghq\x2efish
-SETUVAR _fisher_edc_2F_bass_files:/home/ebith/\x2econfig/fish/functions/__bass\x2epy\x1e/home/ebith/\x2econfig/fish/functions/bass\x2efish
-SETUVAR _fisher_jethrokuan_2F_fzf_files:/home/ebith/\x2econfig/fish/functions/__fzf_cd\x2efish\x1e/home/ebith/\x2econfig/fish/functions/__fzf_complete\x2efish\x1e/home/ebith/\x2econfig/fish/functions/__fzf_complete_preview\x2efish\x1e/home/ebith/\x2econfig/fish/functions/__fzf_find_file\x2efish\x1e/home/ebith/\x2econfig/fish/functions/__fzf_get_dir\x2efish\x1e/home/ebith/\x2econfig/fish/functions/__fzf_open\x2efish\x1e/home/ebith/\x2econfig/fish/functions/__fzf_parse_commandline\x2efish\x1e/home/ebith/\x2econfig/fish/functions/__fzf_reverse_isearch\x2efish\x1e/home/ebith/\x2econfig/fish/functions/__fzfcmd\x2efish\x1e/home/ebith/\x2econfig/fish/conf\x2ed/fzf\x2efish
-SETUVAR _fisher_jorgebucaran_2F_fisher_files:/home/ebith/\x2econfig/fish/functions/fisher\x2efish\x1e/home/ebith/\x2econfig/fish/completions/fisher\x2efish
+SETUVAR __fish_initialized:3800
+SETUVAR _fisher_decors_2F_fish_2D_ghq_files:\x7e/\x2econfig/fish/functions/__ghq_repository_search\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/ghq_key_bindings\x2efish\x1e\x7e/\x2econfig/fish/completions/ghq\x2efish
+SETUVAR _fisher_edc_2F_bass_files:\x7e/\x2econfig/fish/functions/__bass\x2epy\x1e\x7e/\x2econfig/fish/functions/bass\x2efish
+SETUVAR _fisher_jethrokuan_2F_fzf_files:\x7e/\x2econfig/fish/functions/__fzf_cd\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_complete\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_complete_preview\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_find_file\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_get_dir\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_open\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_parse_commandline\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzf_reverse_isearch\x2efish\x1e\x7e/\x2econfig/fish/functions/__fzfcmd\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/fzf\x2efish
+SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejethrokuan/fzf\x1edecors/fish\x2dghq\x1eedc/bass
+SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_autosuggestion:585858
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:a1b56c
@@ -30,7 +31,7 @@ SETUVAR fish_color_operator:7cafc2
 SETUVAR fish_color_param:d8d8d8
 SETUVAR fish_color_quote:f7ca88
 SETUVAR fish_color_redirection:d8d8d8
-SETUVAR fish_color_search_match:bryellow\x1e\x2d\x2dbackground\x3dbrblack
+SETUVAR fish_color_search_match:white\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_status:red
 SETUVAR fish_color_user:brgreen
