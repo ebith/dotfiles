@@ -13,26 +13,26 @@ set fish_user_paths $GOPATH/bin $fish_user_paths
 # Suppress welcome message
 set fish_greeting
 
+set -x EDITOR vim
+
+# Alias
+alias wget='wget --no-hsts'
+
 # Starship: Cross-Shell Prompt - https://starship.rs/
 starship init fish | source
 
 # ajeetdsouza/zoxide: A faster way to navigate your filesystem - https://github.com/ajeetdsouza/zoxide
 zoxide init fish | source
 
-# Alias
+# lsd-rs/lsd: The next gen ls command - https://github.com/lsd-rs/lsd
 alias ls='lsd -a --icon=never'
 alias ll='ls -l'
 alias lt='ls --tree'
 
+# sharkdp/bat: A cat(1) clone with wings. - https://github.com/sharkdp/bat
 alias bat='bat --theme="Monokai Extended Bright"'
 alias cat='bat --plain'
 alias dog='cat > /dev/null'
-
-alias wget='wget --no-hsts'
-
-alias pfgrafana='ssh -fNL 3000:localhost:3000 home'
-alias pfoctopi='ssh -fNL 8080:octopi.local:80 home'
-alias pfremopi='ssh -fNL 42897:raspberrypi3b.local:42897 home'
 
 # fzf [jethrokuan/fzf: Ef-🐟-ient fish keybindings for fzf](https://github.com/jethrokuan/fzf)
 set FZF_DISABLE_KEYBINDINGS 1

@@ -2,11 +2,11 @@
 
 ## Usage
 ```sh
-./create_link.py .config .gitconfig .tmux.conf .yarnrc
+./create_link.py .config .gitconfig .tmux.conf .vim
 mkdir -p ~/.vimlocal/{backup,swap,undo}
 chsh -s $(which fish)
 exec fish
-fisher
+fisher update
 ```
 
 ### tmux

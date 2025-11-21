@@ -20,6 +20,7 @@
   pushf = push --force-with-lease --force-if-includes
 [core]
   editor = vim
+  pager = delta
 [push]
   default = simple
 [rebase]
@@ -28,20 +29,13 @@
   rebase = true
 [merge]
 	tool = vscode
-
-# “dandavison/delta: A viewer for git and diff output” https://github.com/dandavison/delta
-[pager]
-  diff = delta --color-only --syntax-theme OneHalfDark
+  conflictStyle = zdiff3
 [interactive]
-  diffFilter = delta --color-only --syntax-theme OneHalfDark
+  diffFilter = delta --color-only
 [delta]
-  features = decorations
-  whitespace-error-style = 22 reverse
-  side-by-side = true
-[delta "decorations"]
-  commit-decoration-style = bold yellow box ul
-  file-style = bold yellow ul
-  file-decoration-style = none
+  navigate = true
+  dark = true
+  side-by-side =true
 
 # GitHub
 [url "git@github.com:"]
