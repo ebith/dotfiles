@@ -31,5 +31,4 @@ Temporary Items
 
 ## ~/.config/
 .config/configstore/
-.config/wslu/
-.config/yarn/
+.config/gh/hosts.yml
