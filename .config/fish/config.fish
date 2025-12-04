@@ -1,3 +1,5 @@
+source $HOME/.config/fish/config.fish.local
+
 # PATH
 ## Homebrew
 if test -x /home/linuxbrew/.linuxbrew/bin/brew
