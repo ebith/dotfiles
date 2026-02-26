@@ -36,6 +36,8 @@
   navigate = true
   dark = true
   side-by-side =true
+[include]
+  path = .gitconfig.local
 
 # GitHub
 [url "git@github.com:"]
