@@ -1,4 +1,6 @@
-source $HOME/.config/fish/config.fish.local
+if test -x $HOME/.config/fish/config.fish.local
+  source $HOME/.config/fish/config.fish.local
+end
 
 # PATH
 ## Homebrew
