@@ -17,6 +17,11 @@ set fish_user_paths $GOPATH/bin $fish_user_paths
 if test -d $HOME/perl5/lib/perl5
   eval (perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 end
+# pnpm
+set -gx PNPM_HOME "/home/ebith/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
 
 # Suppress welcome message
 set fish_greeting
