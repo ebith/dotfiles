@@ -34,3 +34,6 @@ Temporary Items
 .config/gh/hosts.yml
 .config/fish/fish_variables
 .config/fish/config.fish.local
+.config/fish/functions/
+.config/fish/completions/
+.config/fish/conf.d/
