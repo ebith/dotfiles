@@ -13,6 +13,10 @@ set fish_user_paths $HOME/.cargo/bin $fish_user_paths
 ## Go
 set -x GOPATH $HOME/.go
 set fish_user_paths $GOPATH/bin $fish_user_paths
+## Perl
+if test -d $HOME/perl5/lib/perl5
+  eval (perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
+end
 
 # Suppress welcome message
 set fish_greeting
