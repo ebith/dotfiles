@@ -12,5 +12,6 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 fisher update
 ```
 
-### tmux
-[tmux-plugins/tpm: Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)を入れて`prefix + I`する。
+### tmux [tmux-plugins/tpm: Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
+1. `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+2. `prefix + I`
