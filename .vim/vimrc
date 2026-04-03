@@ -1,6 +1,9 @@
 filetype on
 syntax on
 
+" inodeを維持する
+set backupcopy=yes
+
 " 折り返し時にインデントを考慮する
 set breakindent
 
