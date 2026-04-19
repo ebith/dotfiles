@@ -1,6 +1,7 @@
 {
   "desktop:on": "wakeonlan 00:D8:61:A2:FF:21",
   "3dPrinter:on": "cd /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter && node /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter/poweron.js",
-  "3dPrinter:off": "cd /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter && node /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter/poweroff.js"
+  "3dPrinter:off": "cd /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter && node /home/pi/.ghq/github.com/ebith/scripts-for-3dPrinter/poweroff.js",
+  "light:off": "/home/pi/bin/irrp.py --play --gpio 17 --file /home/pi/.config/remopi/ircodes.json light:on && sleep 1 && /home/pi/bin/irrp.py --play --gpio 17 --file /home/pi/.config/remopi/ircodes.json light:on"
 }
 
