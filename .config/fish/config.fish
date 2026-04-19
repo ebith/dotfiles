@@ -47,7 +47,7 @@ alias bat='bat --theme="Monokai Extended Bright"'
 alias cat='bat --plain'
 alias dog='cat > /dev/null'
 
-# fzf [jethrokuan/fzf: Ef-🐟-ient fish keybindings for fzf](https://github.com/jethrokuan/fzf)
+# fzf: jethrokuan/fzf: Ef-🐟-ient fish keybindings for fzf - https://github.com/jethrokuan/fzf
 set FZF_DISABLE_KEYBINDINGS 1
 set FZF_FIND_FILE_COMMAND 'fd --type file --hidden --follow --exclude .git'
 bind \ct '__fzf_find_file'
