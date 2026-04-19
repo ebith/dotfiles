@@ -71,3 +71,6 @@ function tmux_switch_prefix
     tmux bind '`' run 'tmux last-pane || tmux last-window || tmux new-window'
   end
 end
+
+# mise:  jdx/mise: dev tools, env vars, task runner - https://github.com/jdx/mise
+mise activate fish | source
